@@ -1,0 +1,407 @@
+{
+  "title": {
+    "zh": "電話信令 CAS 與 CCS：原理與設定",
+    "en": "Telephony Signaling: CAS & CCS — Concepts and Configuration"
+  },
+  "voice": {
+    "engine": "gemini-tts",
+    "style": "台灣口音的年輕女性，溫暖、清楚、說故事的語氣，語速適中",
+    "styleEn": "Young female voice with a Taiwanese Mandarin accent, warm and clear storytelling tone, moderate pace"
+  },
+  "chapters": [
+    {
+      "id": "intro",
+      "zh": "為什麼需要信令",
+      "en": "Why Signaling?",
+      "sentences": [
+        {
+          "zh": "拿起話筒、撥號、對方響鈴，接著通話，最後掛斷。",
+          "en": "Lift the handset, dial, the far end rings, you talk, and finally hang up."
+        },
+        {
+          "zh": "除了聲音，線路還得傳遞這些控制訊息，也就是信令 Signaling。",
+          "en": "Besides the voice, the line must carry these control messages. That is signaling."
+        },
+        {
+          "zh": "在數位中繼線上，信令主要有兩種：隨路信令 CAS 與共路信令 CCS。",
+          "en": "On digital trunks there are two main kinds: Channel Associated Signaling (CAS) and Common Channel Signaling (CCS)."
+        },
+        {
+          "zh": "差別在於：信令是跟著每個語音通道走，還是集中在一條專用通道。",
+          "en": "The difference: does signaling ride with each voice channel, or gather on one dedicated channel?"
+        }
+      ]
+    },
+    {
+      "id": "t1e1",
+      "zh": "T1 與 E1 的骨架",
+      "en": "T1 & E1 Framing",
+      "sentences": [
+        {
+          "zh": "先認識載體：T1 有 24 個時槽，每個 DS0 是 64 kbps。",
+          "en": "First, the carrier: a T1 has 24 timeslots, each a 64 kbps DS0."
+        },
+        {
+          "zh": "一個訊框有 193 位元，每秒 8000 個訊框，總速率 1.544 Mbps。",
+          "en": "A frame is 193 bits, 8,000 frames per second, for 1.544 Mbps in total.",
+          "tts": "一個訊框有一百九十三個位元，每秒八千個訊框，總速率一點五四四 Mbps。"
+        },
+        {
+          "zh": "多出來的那 1 個位元，是做訊框同步用的 framing bit。",
+          "en": "The one extra bit is the framing bit, used for frame synchronization."
+        },
+        {
+          "zh": "E1 則有 32 個時槽，總速率 2.048 Mbps。",
+          "en": "An E1 has 32 timeslots, for 2.048 Mbps in total.",
+          "tts": "E1 則有三十二個時槽，總速率二點零四八 Mbps。"
+        },
+        {
+          "zh": "時槽 0 負責訊框同步，時槽 16 通常保留給信令。",
+          "en": "Timeslot 0 handles frame alignment; timeslot 16 is usually reserved for signaling."
+        },
+        {
+          "zh": "所以一條 E1，一般可以承載 30 路語音。",
+          "en": "So an E1 typically carries 30 voice channels."
+        }
+      ]
+    },
+    {
+      "id": "cas",
+      "zh": "CAS 隨路信令",
+      "en": "CAS: Channel Associated Signaling",
+      "sentences": [
+        {
+          "zh": "CAS 的意思是：信令跟著每一個語音通道走。",
+          "en": "CAS means signaling travels with each individual voice channel."
+        },
+        {
+          "zh": "每一路都有自己的狀態位元，用來表示摘機或掛機。",
+          "en": "Every channel has its own state bits, indicating off-hook or on-hook."
+        },
+        {
+          "zh": "常見的線路信令有 Loop Start、Ground Start，以及 E&M。",
+          "en": "Common line signaling types are Loop Start, Ground Start, and E&M.",
+          "tts": "常見的線路信令有 Loop Start、Ground Start，以及 E and M。"
+        },
+        {
+          "zh": "E&M 又分成 Immediate、Wink、Delay Dial 等啟動方式。",
+          "en": "E&M has start modes such as Immediate, Wink, and Delay Dial.",
+          "tts": "E and M 又分成 Immediate、Wink、Delay Dial 等啟動方式。"
+        },
+        {
+          "zh": "以 Wink Start 為例：一端先佔用線路，",
+          "en": "Take Wink Start: one side seizes the line first,"
+        },
+        {
+          "zh": "對端回一個短暫的 wink，才開始送出號碼。",
+          "en": "the far end answers with a brief wink, and only then are digits sent."
+        },
+        {
+          "zh": "號碼本身，通常用 DTMF 或 MF 音頻，在語音通道內傳送。",
+          "en": "The digits themselves are usually sent in-band, as DTMF or MF tones."
+        }
+      ]
+    },
+    {
+      "id": "robbed",
+      "zh": "T1 的位元竊取",
+      "en": "T1 Robbed-Bit Signaling",
+      "sentences": [
+        {
+          "zh": "那 T1 的狀態位元放在哪裡？答案是：借來的。",
+          "en": "So where do T1 state bits live? The answer: they are borrowed."
+        },
+        {
+          "zh": "在 SF 超訊框的第 6 與第 12 個訊框，",
+          "en": "In the SF superframe, in frames 6 and 12,"
+        },
+        {
+          "zh": "每個時槽的最低位元，會被拿去當 A、B 信令位元。",
+          "en": "the least significant bit of every timeslot becomes the A and B signaling bits."
+        },
+        {
+          "zh": "ESF 則在第 6、12、18、24 個訊框，提供 A、B、C、D 四個位元。",
+          "en": "ESF uses frames 6, 12, 18, and 24, providing four bits: A, B, C, and D."
+        },
+        {
+          "zh": "這就是 Robbed-Bit Signaling，位元竊取。",
+          "en": "This is called robbed-bit signaling."
+        },
+        {
+          "zh": "對語音幾乎聽不出差別，但資料傳輸只能安全使用 56 kbps。",
+          "en": "Voice barely notices, but data can only safely use 56 kbps."
+        }
+      ]
+    },
+    {
+      "id": "e1cas",
+      "zh": "E1 CAS 與 R2",
+      "en": "E1 CAS & R2",
+      "sentences": [
+        {
+          "zh": "E1 的 CAS 不偷位元，而是把信令放在時槽 16。",
+          "en": "E1 CAS doesn't rob bits; it places signaling in timeslot 16."
+        },
+        {
+          "zh": "16 個訊框組成一個多訊框，第 0 個訊框負責多訊框同步。",
+          "en": "Sixteen frames form a multiframe; frame 0 carries the multiframe alignment."
+        },
+        {
+          "zh": "其餘 15 個訊框，每個帶兩路的 ABCD 位元，剛好涵蓋 30 路。",
+          "en": "Each of the other 15 frames carries ABCD bits for two channels, covering all 30."
+        },
+        {
+          "zh": "雖然位置集中，但每組位元固定對應某一路，所以仍然是 CAS。",
+          "en": "Though grouped together, each bit group maps to a fixed channel, so it is still CAS."
+        },
+        {
+          "zh": "常見的 MFC-R2，就是用這些位元做線路信令，",
+          "en": "The widely used MFC-R2 uses these bits for line signaling,"
+        },
+        {
+          "zh": "再用語音通道內的多頻互控音，傳遞號碼。",
+          "en": "and compelled multi-frequency tones inside the voice channel to pass the digits."
+        }
+      ]
+    },
+    {
+      "id": "ccs",
+      "zh": "CCS 共路信令",
+      "en": "CCS: Common Channel Signaling",
+      "sentences": [
+        {
+          "zh": "CCS 換了一個思路：把所有通道的信令，集中在一條專用通道。",
+          "en": "CCS takes another approach: signaling for all channels goes on one dedicated channel."
+        },
+        {
+          "zh": "信令不再只是幾個位元，而是有結構的訊息。",
+          "en": "Signaling is no longer just a few bits, but structured messages."
+        },
+        {
+          "zh": "在企業常見的 ISDN PRI 裡，這條通道叫做 D 通道。",
+          "en": "In ISDN PRI, common in enterprises, this channel is called the D channel."
+        },
+        {
+          "zh": "T1 PRI 是 23B+D，D 通道在時槽 24。",
+          "en": "T1 PRI is 23B+D, with the D channel on timeslot 24.",
+          "tts": "T1 PRI 是 23 B 加 D，D 通道在時槽 24。"
+        },
+        {
+          "zh": "E1 PRI 是 30B+D，D 通道在時槽 16。",
+          "en": "E1 PRI is 30B+D, with the D channel on timeslot 16.",
+          "tts": "E1 PRI 是 30 B 加 D，D 通道在時槽 16。"
+        },
+        {
+          "zh": "電信業者之間，則使用另一套 CCS：七號信令 SS7。",
+          "en": "Between carriers, another CCS system is used: Signaling System No. 7, or SS7."
+        },
+        {
+          "zh": "對網路工程師來說，這很像 SIP 與 RTP：信令和媒體分開走。",
+          "en": "For network engineers, it is much like SIP and RTP: signaling and media travel separately."
+        }
+      ]
+    },
+    {
+      "id": "q931",
+      "zh": "Q.931 通話流程",
+      "en": "Q.931 Call Flow",
+      "sentences": [
+        {
+          "zh": "D 通道的第二層是 Q.921，也就是 LAPD；第三層是 Q.931。",
+          "en": "The D channel runs Q.921, also known as LAPD, at Layer 2, and Q.931 at Layer 3.",
+          "tts": "D 通道的第二層是 Q 點 921，也就是 LAPD；第三層是 Q 點 931。"
+        },
+        {
+          "zh": "發話端送出 SETUP，帶著被叫號碼與要使用的 B 通道。",
+          "en": "The calling side sends SETUP, carrying the called number and the B channel to use."
+        },
+        {
+          "zh": "對端回 CALL PROCEEDING，接著用 ALERTING 表示正在響鈴。",
+          "en": "The far end replies CALL PROCEEDING, then ALERTING while the phone rings."
+        },
+        {
+          "zh": "對方接聽時送出 CONNECT，再以 CONNECT ACK 確認。",
+          "en": "When answered, it sends CONNECT, confirmed with CONNECT ACK."
+        },
+        {
+          "zh": "掛斷則依序是 DISCONNECT、RELEASE、RELEASE COMPLETE。",
+          "en": "Hang-up follows DISCONNECT, RELEASE, then RELEASE COMPLETE."
+        },
+        {
+          "zh": "拆線訊息都帶有 Cause Code，排錯時非常好用。",
+          "en": "Clearing messages carry a cause code, which is very handy for troubleshooting."
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "zh": "CAS 與 CCS 比較",
+      "en": "CAS vs. CCS",
+      "sentences": [
+        {
+          "zh": "把兩者並排比較一下。",
+          "en": "Let's compare the two side by side."
+        },
+        {
+          "zh": "CAS 簡單、相容老設備，但能傳遞的資訊有限。",
+          "en": "CAS is simple and compatible with legacy equipment, but carries limited information."
+        },
+        {
+          "zh": "CCS 能傳送來電號碼、失敗原因等豐富資訊，",
+          "en": "CCS can carry rich information such as calling number and failure cause,"
+        },
+        {
+          "zh": "而且每個 B 通道都保有完整的 64 kbps。",
+          "en": "and every B channel keeps the full, clear 64 kbps."
+        },
+        {
+          "zh": "代價是 T1 PRI 要讓出一個時槽給 D 通道，只剩 23 路。",
+          "en": "The trade-off: T1 PRI gives one timeslot to the D channel, leaving 23 bearers."
+        },
+        {
+          "zh": "不過透過 NFAS，一條 D 通道可以控制多條 T1。",
+          "en": "But with NFAS, a single D channel can control multiple T1s."
+        }
+      ]
+    },
+    {
+      "id": "cfgcas",
+      "zh": "設定實戰：CAS",
+      "en": "Hands-on: Configuring CAS",
+      "sentences": [
+        {
+          "zh": "動手設定前，先跟電信業者或對端確認參數。",
+          "en": "Before configuring, confirm the parameters with the carrier or the far end."
+        },
+        {
+          "zh": "T1 要確認訊框是 SF 還是 ESF，線路編碼是 AMI 還是 B8ZS。",
+          "en": "For T1: framing SF or ESF, and line coding AMI or B8ZS."
+        },
+        {
+          "zh": "E1 要確認是否啟用 CRC4，線路編碼通常是 HDB3。",
+          "en": "For E1: whether CRC4 is enabled; line coding is usually HDB3."
+        },
+        {
+          "zh": "時脈來源通常設為 line，跟隨電信端。",
+          "en": "Clock source is usually set to line, following the carrier."
+        },
+        {
+          "zh": "以 Cisco IOS 為例，CAS 用 ds0-group 指定時槽與信令類型。",
+          "en": "In Cisco IOS, CAS uses ds0-group to set the timeslots and signaling type.",
+          "tts": "以 Cisco IOS 為例，CAS 用 D S zero group 指定時槽與信令類型。"
+        },
+        {
+          "zh": "系統會產生對應的 voice-port，再用 dial-peer 指向它。",
+          "en": "This creates a matching voice-port, and a dial-peer then points to it."
+        }
+      ]
+    },
+    {
+      "id": "cfgpri",
+      "zh": "設定實戰：PRI 與驗證",
+      "en": "Hands-on: PRI & Verification",
+      "sentences": [
+        {
+          "zh": "如果是 PRI，先設定 ISDN switch-type，要與對端一致。",
+          "en": "For PRI, first set the ISDN switch-type to match the far end."
+        },
+        {
+          "zh": "在 controller 底下，用 pri-group 指定時槽。",
+          "en": "Under the controller, use pri-group to specify the timeslots."
+        },
+        {
+          "zh": "T1 會產生 Serial 介面 :23，E1 則是 :15，代表 D 通道。",
+          "en": "T1 creates a Serial interface ending in :23, E1 one ending in :15; it represents the D channel.",
+          "tts": "T1 會產生 Serial 介面冒號二十三，E1 則是冒號十五，代表 D 通道。"
+        },
+        {
+          "zh": "用 show isdn status 驗證，第二層應顯示 MULTIPLE_FRAME_ESTABLISHED。",
+          "en": "Verify with show isdn status; Layer 2 should show MULTIPLE_FRAME_ESTABLISHED.",
+          "tts": "用 show isdn status 驗證，第二層應顯示 multiple frame established。"
+        },
+        {
+          "zh": "如果出現 slips，多半是兩端時脈來源設定不一致。",
+          "en": "If you see slips, the clock sources on the two ends are most likely mismatched."
+        },
+        {
+          "zh": "CAS 可用 debug vpm signal 觀察位元；PRI 則用 debug isdn q931。",
+          "en": "For CAS, debug vpm signal shows the bits; for PRI, use debug isdn q931.",
+          "tts": "CAS 可用 debug vpm signal 觀察位元；PRI 則用 debug isdn q 931。"
+        },
+        {
+          "zh": "記住：CAS 信令跟著通道走，CCS 信令集中在專用通道。",
+          "en": "Remember: CAS signaling rides each channel; CCS gathers it on a dedicated channel."
+        },
+        {
+          "zh": "兩端參數對齊，就是穩定上線的第一步。謝謝收看！",
+          "en": "Matching parameters on both ends is the first step to a stable link. Thanks for watching!"
+        }
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "id": "phone",
+      "zh": "小話機",
+      "en": "Phone",
+      "roleZh": "使用者端點（FXS 端）",
+      "roleEn": "User endpoint (FXS side)",
+      "descZh": "會摘機、掛機、撥號的電話。它的每個動作，都要變成信令送出去。",
+      "descEn": "Goes off-hook, on-hook and dials. Every action it takes must become signaling."
+    },
+    {
+      "id": "pbx",
+      "zh": "阿交",
+      "en": "PBX",
+      "roleZh": "企業交換機",
+      "roleEn": "Private branch exchange",
+      "descZh": "企業內的交換機，透過 T1/E1 中繼線和電信局或語音閘道連接。",
+      "descEn": "The enterprise switch, connected to the carrier or a voice gateway over T1/E1 trunks."
+    },
+    {
+      "id": "co",
+      "zh": "電信局",
+      "en": "Central Office",
+      "roleZh": "電信業者交換機",
+      "roleEn": "Carrier switch",
+      "descZh": "提供中繼線與時脈的一端，參數要以它為準。",
+      "descEn": "Provides the trunk and usually the clock. Match your parameters to it."
+    },
+    {
+      "id": "slot",
+      "zh": "時槽列車",
+      "en": "Timeslot Train",
+      "roleZh": "DS0 時槽",
+      "roleEn": "DS0 timeslots",
+      "descZh": "每節車廂是一個 64 kbps 的 DS0，T1 有 24 節，E1 有 32 節。",
+      "descEn": "Each car is a 64 kbps DS0. A T1 has 24 cars, an E1 has 32."
+    },
+    {
+      "id": "thief",
+      "zh": "位元小偷",
+      "en": "Bit Thief",
+      "roleZh": "T1 位元竊取信令",
+      "roleEn": "T1 robbed-bit signaling",
+      "descZh": "在特定訊框借走每個時槽的最低位元，拿來當 A/B/C/D 信令位元。",
+      "descEn": "Borrows the least significant bit of every timeslot in certain frames to use as A/B/C/D bits."
+    },
+    {
+      "id": "courier",
+      "zh": "D 通道信差",
+      "en": "D-Channel Courier",
+      "roleZh": "ISDN PRI 的信令通道",
+      "roleEn": "ISDN PRI signaling channel",
+      "descZh": "專門搬運 Q.931 訊息，一個人負責所有 B 通道的建立與拆線。",
+      "descEn": "Carries Q.931 messages and handles setup and teardown for every B channel."
+    },
+    {
+      "id": "gateway",
+      "zh": "語音閘道",
+      "en": "Voice Gateway",
+      "roleZh": "Cisco IOS 路由器",
+      "roleEn": "Cisco IOS router",
+      "descZh": "裝有 T1/E1 模組的路由器，用 controller、voice-port 與 dial-peer 完成設定。",
+      "descEn": "A router with a T1/E1 module, configured with controller, voice-port and dial-peer."
+    }
+  ]
+}
