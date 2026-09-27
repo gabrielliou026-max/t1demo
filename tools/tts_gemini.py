@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """Generate narration with Gemini TTS, one WAV per sentence, into build/tts/.
 
-Each chapter is synthesized in a single request (one sentence per line) so the
-voice stays consistent within the chapter; separately generated sentences drift
-in timbre. The chapter audio is then cut back into sentences at the longest
-pauses, and each sentence is checked against its expected length.
+The whole script is synthesized in a single request (one sentence per line):
+sentences or chapters generated in separate requests drift in timbre and accent,
+so the narration sounds like different speakers. The audio is then cut back into
+sentences at the longest pauses, and each sentence is checked against its
+expected length.
 
 Needs GEMINI_API_KEY in the environment. Optional overrides:
   GEMINI_TTS_MODEL  (default: gemini-2.5-flash-preview-tts)
   GEMINI_TTS_VOICE  (default: Sulafat — a warm female prebuilt voice)
 
-Results are cached per chapter by (model, voice, prompt) so re-runs only fetch changed chapters.
+The result is cached by (model, voice, prompt), so re-runs fetch again only when the script changes.
 Leading/trailing silence is trimmed so subtitle cues line up with the speech.
 """
 import base64, hashlib, json, os, re, sys, time, urllib.request, urllib.error, wave, struct
@@ -26,12 +27,14 @@ MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-2.5-flash-preview-tts")
 VOICE = os.environ.get("GEMINI_TTS_VOICE", "Sulafat")
 RATE = 24000  # Gemini TTS returns 16-bit mono PCM at 24 kHz
 
-STYLE = ("請用台灣口音的年輕女性聲音朗讀下面這段旁白，語氣溫暖、清楚，像在說故事給工程師聽，"
-         "語速自然適中，英文技術名詞照英文發音。每一行是一句，句與句之間停頓約一秒。只唸旁白內容：\n")
+STYLE = ("你是一位充滿熱情的科技 YouTuber，用台灣華語為工程師講解通訊知識。"
+         "語氣活潑有精神、抑揚頓挫明顯，重點詞加重語氣，問句要有問的語調，偶爾帶點笑意，"
+         "節奏明快但每個字都清楚。英文技術名詞照英文發音。每一行是一句。每一句念完，"
+         "一定要完全停頓整整兩秒再念下一句，句子裡面的逗號只要短暫停頓。只唸旁白內容：\n")
 QUIET = 350        # 16-bit peak below which a 10 ms window counts as silence
 MIN_PAUSE = 0.4    # a sentence break must be at least this long (seconds)
 BLIP = 3           # loud 10 ms windows tolerated inside a pause
-TRIES = 4          # chapter regenerations when the audio can't be split cleanly
+TRIES = 4          # regenerations when the audio can't be split cleanly
 
 
 def request(text):
@@ -48,7 +51,7 @@ def request(text):
                                  headers={"Content-Type": "application/json", "x-goog-api-key": key})
     for attempt in range(6):
         try:
-            with urllib.request.urlopen(req, timeout=300) as r:
+            with urllib.request.urlopen(req, timeout=900) as r:
                 data = json.load(r)
             part = data["candidates"][0]["content"]["parts"][0]["inlineData"]
             return base64.b64decode(part["data"])
@@ -61,7 +64,7 @@ def request(text):
                 continue
             sys.exit(f"Gemini TTS failed: HTTP {e.code}: {msg}")
         except (KeyError, IndexError):
-            # e.g. finishReason OTHER with no audio; the caller retries the chapter
+            # e.g. finishReason OTHER with no audio; the caller retries
             print("    no audio in response", flush=True)
             return None
 
@@ -117,7 +120,7 @@ def split(pcm, lines):
         return None
     bounds = [0] + [(a + b) // 2 * win for a, b in cuts] + [len(pcm) // 2]
     parts = [trim(pcm[a * 2:b * 2]) for a, b in zip(bounds, bounds[1:])]
-    # a skipped or merged sentence shows up as a length mismatch against the chapter's own pace
+    # a skipped or merged sentence shows up as a length mismatch against the overall pace
     ratios = [len(p) / 2 / RATE / estimate(text) for p, text in zip(parts, lines)]
     pace = float(np.median(ratios))
     for r, text in zip(ratios, lines):
@@ -133,31 +136,27 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     os.makedirs(CACHE, exist_ok=True)
     script = json.load(open(SCRIPT, encoding="utf-8"))
-    chapters = [[s.get("tts", s["zh"]) for s in ch["sentences"]] for ch in script["chapters"]]
-    total = sum(map(len, chapters))
-    print(f"Gemini TTS: model={MODEL} voice={VOICE} chapters={len(chapters)} sentences={total}")
-    n = 0
-    for c, lines in enumerate(chapters):
-        text = "\n".join(lines)
-        h = hashlib.sha1(f"{MODEL}|{VOICE}|{STYLE}|{text}".encode()).hexdigest()[:16]
-        cached = os.path.join(CACHE, f"ch_{h}.pcm")
-        parts = split(open(cached, "rb").read(), lines) if os.path.exists(cached) else None
-        for attempt in range(TRIES):
-            if parts:
-                break
-            print(f"  chapter {c} ({len(lines)} sentences), try {attempt + 1}", flush=True)
-            pcm = request(text)
-            if pcm and (parts := split(pcm, lines)):
-                open(cached, "wb").write(pcm)  # written only once the audio is known to split cleanly
-        if not parts:
-            sys.exit(f"Gemini TTS: chapter {c} could not be split into {len(lines)} sentences after {TRIES} tries")
-        for p in parts:
-            with wave.open(os.path.join(OUT_DIR, f"{n:03d}.wav"), "wb") as w:
-                w.setnchannels(1); w.setsampwidth(2); w.setframerate(RATE); w.writeframes(p)
-            n += 1
+    lines = [s.get("tts", s["zh"]) for ch in script["chapters"] for s in ch["sentences"]]
+    print(f"Gemini TTS: model={MODEL} voice={VOICE} sentences={len(lines)} (one request)")
+    text = "\n".join(lines)
+    h = hashlib.sha1(f"{MODEL}|{VOICE}|{STYLE}|{text}".encode()).hexdigest()[:16]
+    cached = os.path.join(CACHE, f"all_{h}.pcm")
+    parts = split(open(cached, "rb").read(), lines) if os.path.exists(cached) else None
+    for attempt in range(TRIES):
+        if parts:
+            break
+        print(f"  try {attempt + 1}", flush=True)
+        pcm = request(text)
+        if pcm and (parts := split(pcm, lines)):
+            open(cached, "wb").write(pcm)  # written only once the audio is known to split cleanly
+    if not parts:
+        sys.exit(f"Gemini TTS: narration could not be split into {len(lines)} sentences after {TRIES} tries")
+    for n, p in enumerate(parts):
+        with wave.open(os.path.join(OUT_DIR, f"{n:03d}.wav"), "wb") as w:
+            w.setnchannels(1); w.setsampwidth(2); w.setframerate(RATE); w.writeframes(p)
     # remove stale files from a longer previous script
     for f in os.listdir(OUT_DIR):
-        if f.endswith(".wav") and int(f[:3]) >= total:
+        if f.endswith(".wav") and int(f[:3]) >= len(lines):
             os.remove(os.path.join(OUT_DIR, f))
     print("done")
 
