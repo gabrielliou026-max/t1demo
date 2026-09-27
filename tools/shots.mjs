@@ -10,7 +10,7 @@ const out = path.join(root, 'build', 'shots');
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 const only = process.argv[2] !== undefined ? Number(process.argv[2]) : null;
-const browser = await chromium.launch({ args: ['--allow-file-access-from-files'] });
+const browser = await chromium.launch({ args: ['--allow-file-access-from-files', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
 page.on('console', (m) => console.log('[page]', m.text()));
 page.on('pageerror', (e) => console.log('[pageerror]', e.message));

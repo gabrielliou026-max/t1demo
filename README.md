@@ -7,7 +7,9 @@
 - `SCRIPT.md`：完整的中英對照旁白腳本，附時間碼
 - `script/script.json`：腳本原始檔（修改內容都從這裡改）
 
-所有畫面、角色和背景音樂都由程式生成，沒有使用外部素材。網頁和影片用的是同一個 `web/engine.js`，所以兩邊的畫面完全一致。
+畫面風格是「Q 版紙藝／黏土 Low-Poly」：所有角色與示範都用 Three.js 原生幾何體（Box、Cylinder、Sphere、Cone、Capsule、Torus、Icosahedron、Plane）組裝，搭配 flat shading 與柔和粉彩色。指令畫面、檢查清單、比較表等文字內容則印在 3D 紙卡、夾板與黏土螢幕上。字幕、章節名稱、進度條和小標籤是疊在畫面上的 2D 層。
+
+所有畫面、角色和背景音樂都由程式生成，沒有使用外部素材。網頁和影片用的是同一個 `web/engine.js`，而且每一格只由時間決定，所以兩邊的畫面完全一致。Three.js r149（MIT 授權）放在 `web/vendor/`，隨網頁一起發布。
 
 ## 旁白語音（Gemini TTS）
 
@@ -31,7 +33,9 @@
 | 時間軸 | `tools/timeline.py` | `web/data.js`（每句的開始與結束時間；有 TTS 就用實際長度） |
 | 音樂與混音 | `tools/audio.py` | 原創配樂；旁白出現時音樂降低約 11 dB；輸出 `web/audio.mp3`、`build/mix.m4a` |
 | 截圖檢查 | `tools/shots.mjs`、`tools/sheets.py` | 每句一張畫面，並拼成 2×2 總覽圖 |
-| 影片 | `tools/render.mjs` | 用 headless Chromium 逐格渲染，再以 ffmpeg 編成 H.264/AAC |
+| 影片 | `tools/render.mjs` | 用 headless Chromium（SwiftShader WebGL）逐格渲染，再以 ffmpeg 編成 H.264/AAC |
+
+鏡頭會自動取景：每個場景宣告內容的 3D 範圍，引擎再算出剛好放進畫面安全區的鏡頭位置，避開上方標題列和下方字幕。
 
 字幕會在兩句之間的停頓切換，時間對齊每句語音的開始時間。
 

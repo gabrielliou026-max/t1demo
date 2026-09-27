@@ -6,19 +6,19 @@
 <style>
   :root {
     color-scheme: dark;
-    --bg: #050a16;
-    --bg2: #0a1430;
-    --panel: #0d1a36;
-    --panel2: #11224a;
-    --line: #1f3160;
-    --ink: #eaf2ff;
-    --mute: #93a7cc;
-    --dim: #5b6f98;
-    --cyan: #3fe2ff;
-    --teal: #34e3a4;
-    --amber: #ffb74a;
-    --violet: #a08cff;
-    --pink: #ff6190;
+    --bg: #23244d;
+    --bg2: #2d2c5e;
+    --panel: #34336a;
+    --panel2: #3e3d78;
+    --line: #4a4884;
+    --ink: #fff7ec;
+    --mute: #d4ccff;
+    --dim: #a59ed8;
+    --cyan: #92d2ff;
+    --teal: #a2e7c6;
+    --amber: #ffd77e;
+    --violet: #c8b8ff;
+    --pink: #ffb3c9;
     --sans: 'Noto Sans TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
     --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
     --disp: 'Oxanium', 'Noto Sans TC', sans-serif;
@@ -33,7 +33,7 @@
     padding-inline: 16px;
     padding-block: 28px 64px;
     background:
-      radial-gradient(1200px 600px at 50% -10%, #12275a 0%, rgba(18,39,90,0) 70%),
+      radial-gradient(1200px 600px at 50% -10%, #4a4580 0%, rgba(74,69,128,0) 70%),
       var(--bg);
   }
   .wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 28px; }
@@ -44,28 +44,28 @@
   .lede { margin: 4px 0 0; color: var(--mute); max-width: 68ch; }
   .notice {
     display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border-radius: 10px;
-    background: rgba(255,183,74,.08); border: 1px solid rgba(255,183,74,.35); color: #ffd9a0; font-size: 14px;
+    background: rgba(255,215,126,.12); border: 1px solid rgba(255,215,126,.45); color: #ffe9b8; font-size: 14px;
   }
   .notice b { color: var(--amber); }
 
   /* player */
-  .player { background: #000; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 20px 60px rgba(0,0,0,.45); }
-  .stage { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #050912; cursor: pointer; }
+  .player { background: #1b1a3c; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+  .stage { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #2b2d5e; cursor: pointer; }
   .stage canvas { width: 100%; height: 100%; display: block; }
   .bigplay {
     position: absolute; inset: 0; margin: auto; width: 96px; height: 96px; border-radius: 50%;
-    border: 2px solid var(--cyan); background: rgba(5,12,28,.7); color: var(--cyan);
+    border: 3px solid var(--ink); background: rgba(255,183,201,.92); color: #fff; box-shadow: 0 8px 0 rgba(0,0,0,.18);
     display: grid; place-items: center; cursor: pointer; transition: transform .15s, opacity .2s;
   }
   .bigplay:hover { transform: scale(1.06); }
   .bigplay svg { width: 38px; height: 38px; margin-left: 6px; }
   .controls {
     display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
-    padding: 12px 14px; background: linear-gradient(180deg, #0b1630, #081126); border-top: 1px solid var(--line);
+    padding: 12px 14px; background: #2d2c5e; border-top: 1px solid var(--line);
   }
   .btn {
     appearance: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
-    height: 36px; min-width: 36px; padding: 0 12px; border-radius: 9px; font: 600 14px var(--sans);
+    height: 36px; min-width: 36px; padding: 0 12px; border-radius: 12px; font: 600 14px var(--sans);
     display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;
   }
   .btn:hover { border-color: #33508f; background: var(--panel2); }
@@ -76,25 +76,25 @@
   .time { font: 500 13px var(--mono); color: var(--mute); font-variant-numeric: tabular-nums; min-width: 104px; }
   .seek { flex: 1 1 260px; position: relative; height: 26px; display: flex; align-items: center; }
   .ticks { position: absolute; left: 0; right: 0; top: 50%; height: 6px; transform: translateY(-50%); display: flex; gap: 3px; pointer-events: none; }
-  .ticks i { display: block; height: 100%; border-radius: 3px; background: #1a2a52; position: relative; overflow: hidden; }
-  .ticks i b { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, var(--cyan), var(--teal)); }
+  .ticks i { display: block; height: 100%; border-radius: 3px; background: rgba(255,247,236,.2); position: relative; overflow: hidden; }
+  .ticks i b { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, var(--cyan), var(--teal), var(--amber)); }
   .seek input { position: relative; width: 100%; margin: 0; background: transparent; appearance: none; height: 26px; cursor: pointer; }
   .seek input::-webkit-slider-runnable-track { height: 6px; background: transparent; }
   .seek input::-moz-range-track { height: 6px; background: transparent; }
-  .seek input::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; margin-top: -5px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px rgba(63,226,255,.35); }
+  .seek input::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; margin-top: -5px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 4px rgba(255,179,201,.6); }
   .seek input::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--ink); }
-  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
   .seg button {
     appearance: none; border: 0; background: var(--panel); color: var(--mute); height: 34px; padding: 0 11px;
     font: 600 13px var(--sans); cursor: pointer;
   }
   .seg button + button { border-left: 1px solid var(--line); }
-  .seg button[aria-pressed="true"] { background: #173466; color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--amber); color: #4a3510; }
   .ctl-label { font-size: 12px; color: var(--dim); letter-spacing: .08em; }
   .now {
-    display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; padding: 10px 16px 14px; background: #081126; font-size: 14px;
+    display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; padding: 10px 16px 14px; background: #262550; font-size: 14px;
   }
-  .now .ch { font: 700 12px var(--disp); letter-spacing: .18em; color: var(--cyan); }
+  .now .ch { font: 700 12px var(--disp); letter-spacing: .18em; color: var(--amber); }
   .now .zh { font-weight: 700; }
   .now .en { color: var(--mute); }
 
@@ -106,7 +106,7 @@
   .chap {
     appearance: none; text-align: left; cursor: pointer; color: var(--ink);
     display: grid; grid-template-columns: 44px 1fr; gap: 2px 12px; align-items: center;
-    padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: rgba(13,26,54,.7);
+    padding: 12px 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg2);
     font: inherit;
   }
   .chap:hover { border-color: #33508f; }
@@ -114,13 +114,13 @@
   .chap .t { font-weight: 800; font-size: 15px; line-height: 1.35; }
   .chap .m { font-size: 12.5px; color: var(--mute); display: flex; justify-content: space-between; gap: 8px; }
   .chap .m span:last-child { font-family: var(--mono); color: var(--dim); font-variant-numeric: tabular-nums; }
-  .chap[aria-current="true"] { border-color: var(--cyan); background: rgba(20,48,92,.75); }
-  .chap[aria-current="true"] .n { color: var(--cyan); }
+  .chap[aria-current="true"] { border-color: var(--amber); background: var(--panel2); }
+  .chap[aria-current="true"] .n { color: var(--amber); }
 
   /* characters */
   .cast { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-  .card { border: 1px solid var(--line); border-radius: 14px; background: rgba(13,26,54,.72); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); }
-  .card canvas { width: 100%; height: auto; aspect-ratio: 520 / 340; display: block; background: radial-gradient(260px 140px at 50% 60%, #122a58, #070f22); border-bottom: 1px solid var(--line); }
+  .card { border: 1px solid var(--line); border-radius: 20px; background: var(--bg2); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .card canvas { width: 100%; height: auto; aspect-ratio: 520 / 340; display: block; background: radial-gradient(260px 160px at 50% 70%, #6b6fb2, #3a3a74); border-bottom: 1px solid var(--line); }
   .card .body { padding: 14px 16px 16px; display: grid; gap: 4px; }
   .card .name { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   .card .name b { font-size: 18px; font-weight: 900; }
@@ -130,7 +130,7 @@
   .card p.en { color: var(--mute); font-size: 13px; margin-top: 2px; }
 
   /* script */
-  details.script { border: 1px solid var(--line); border-radius: 14px; background: rgba(10,20,44,.7); }
+  details.script { border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); }
   details.script summary { cursor: pointer; padding: 14px 18px; font-weight: 800; font-size: 16px; }
   details.script summary span { color: var(--mute); font-weight: 500; font-size: 14px; margin-left: 8px; }
   .script-body { padding: 0 18px 18px; display: grid; gap: 18px; }
@@ -139,8 +139,8 @@
     appearance: none; display: grid; grid-template-columns: 58px 1fr; gap: 2px 12px; width: 100%; text-align: left;
     padding: 7px 10px; border: 0; border-radius: 8px; background: transparent; color: var(--ink); font: inherit; cursor: pointer;
   }
-  .line:hover { background: rgba(63,226,255,.06); }
-  .line[aria-current="true"] { background: rgba(63,226,255,.12); }
+  .line:hover { background: rgba(255,247,236,.06); }
+  .line[aria-current="true"] { background: rgba(255,215,126,.16); }
   .line .ts { grid-row: span 2; font: 500 12px var(--mono); color: var(--dim); padding-top: 3px; font-variant-numeric: tabular-nums; }
   .line .en { color: var(--mute); font-size: 13.5px; }
   footer { color: var(--dim); font-size: 13px; }
@@ -206,7 +206,7 @@
 
   <section>
     <h2>角色介紹</h2>
-    <p class="sub">Characters · 影片中出現的角色與概念，全部以程式繪製</p>
+    <p class="sub">Characters · 影片中的角色，全部用 Three.js 原生幾何體（Box、Cylinder、Sphere、Cone、Capsule…）組成</p>
     <div class="cast" id="cast"></div>
   </section>
 
@@ -215,10 +215,11 @@
     <div class="script-body" id="script"></div>
   </details>
 
-  <footer>動畫、插圖與配樂皆為原創，以程式即時生成。Cisco IOS 指令為常見範例，實際語法請依設備版本確認。</footer>
+  <footer>動畫、角色與配樂皆為原創，以 Three.js 與程式即時生成。Cisco IOS 指令為常見範例，實際語法請依設備版本確認。</footer>
 </div>
 
 <audio id="audio" src="audio.mp3" preload="auto"></audio>
+<script src="vendor/three.min.js"></script>
 <script src="data.js" charset="utf-8"></script>
 <script src="engine.js" charset="utf-8"></script>
 <script>
@@ -336,7 +337,7 @@
   });
 
   // ---- characters ----
-  const FIT = { phone: [0.62, 20], pbx: [0.5, 8], co: [0.55, 38], slot: [0.72, 6], thief: [0.72, 6], courier: [0.95, -8], gateway: [0.78, 0] };
+  const studio = CASCCS.studio(520, 340);
   const cast = $('cast'), cards = [];
   D.characters.forEach((c) => {
     const col = CASCCS.CHAR_COLOR[c.id] || '#3fe2ff';
@@ -353,15 +354,24 @@
     cast.appendChild(el);
     cards.push({ id: c.id, ctx: el.querySelector('canvas').getContext('2d'), el });
   });
+  // Render the 3D portraits at ~15 fps, only for cards on screen.
+  const onScreen = new Set();
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => {
+    const c = cards.find((k) => k.el === e.target);
+    if (e.isIntersecting) onScreen.add(c); else onScreen.delete(c);
+  })) : null;
+  cards.forEach((c) => (io ? io.observe(c.el) : onScreen.add(c)));
+  let lastCards = -1, firstPass = true;
   function drawCards(now) {
+    if (now - lastCards < 66) return;
+    lastCards = now;
     const tt = now / 1000;
-    cards.forEach((c) => {
-      const [s, dy] = FIT[c.id] || [0.6, 0];
-      c.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    (firstPass ? cards : onScreen).forEach((c) => {
+      const img = studio.render(c.id, tt);
       c.ctx.clearRect(0, 0, 520, 340);
-      c.ctx.setTransform(2, 0, 0, 2, 0, 0);
-      CASCCS.drawCharacter(c.ctx, c.id, 130, 85 + dy, s, tt);
+      c.ctx.drawImage(img, 0, 0);
     });
+    firstPass = false;
   }
 
   // ---- UI sync ----
@@ -412,8 +422,8 @@
     .concat(["400 20px 'JetBrains Mono'", "700 20px 'JetBrains Mono'", "500 20px 'Oxanium'", "700 20px 'Oxanium'"]);
   const engineText = fetch('engine.js').then((r) => r.text()).catch(() => '');
   engineText.then((src) => Promise.all(faces.map((f) => document.fonts.load(f, sample + src).catch(() => {}))))
-    .finally(() => { dirty = true; });
-  if (document.fonts) document.fonts.addEventListener('loadingdone', () => { dirty = true; });
+    .finally(() => { app.refreshText(); dirty = true; });
+  if (document.fonts) document.fonts.addEventListener('loadingdone', () => { app.refreshText(); dirty = true; });
   const start = Number(location.hash.replace('#t', '')) || 0;
   if (start) jump(start);
   requestAnimationFrame(frame);

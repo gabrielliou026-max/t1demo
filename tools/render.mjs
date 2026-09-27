@@ -14,7 +14,7 @@ fs.rmSync(frames, { recursive: true, force: true });
 fs.mkdirSync(frames, { recursive: true });
 const engineSrc = fs.readFileSync(path.join(root, 'web', 'engine.js'), 'utf8');
 
-const browser = await chromium.launch({ args: ['--allow-file-access-from-files'] });
+const browser = await chromium.launch({ args: ['--allow-file-access-from-files', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 async function openPage() {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   page.on('pageerror', (e) => console.log('[pageerror]', e.message));
