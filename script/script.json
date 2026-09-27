@@ -52,8 +52,7 @@
         },
         {
           "zh": "E1 則有 32 個時槽，總速率 2.048 Mbps。",
-          "en": "An E1 has 32 timeslots, for 2.048 Mbps in total.",
-          "tts": "E1 則有三十二個時槽，總速率二點零四八 Mbps。"
+          "en": "An E1 has 32 timeslots, for 2.048 Mbps in total."
         },
         {
           "zh": "時槽 0 負責訊框同步，時槽 16 通常保留給信令。",
