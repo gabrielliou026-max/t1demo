@@ -81,7 +81,8 @@ def main():
         cached = os.path.join(CACHE, h + ".pcm")
         if not os.path.exists(cached):
             print(f"  [{n:02d}] {text}", flush=True)
-            open(cached, "wb").write(trim(request(text)))
+            pcm = trim(request(text))  # fetch before opening, so a failed request leaves no empty cache file
+            open(cached, "wb").write(pcm)
         pcm = open(cached, "rb").read()
         with wave.open(os.path.join(OUT_DIR, f"{n:03d}.wav"), "wb") as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(RATE); w.writeframes(pcm)
