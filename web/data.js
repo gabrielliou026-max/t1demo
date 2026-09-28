@@ -76,8 +76,8 @@ window.CASCCS_DATA = {
  ],
  "timeline": {
   "fps": 30,
-  "duration": 329.89,
-  "narrated": false,
+  "duration": 366.391,
+  "narrated": true,
   "chapters": [
    {
     "id": "intro",
@@ -85,79 +85,79 @@ window.CASCCS_DATA = {
     "en": "Why Signaling?",
     "start": 0.0,
     "lead": 4.5,
-    "end": 28.27
+    "end": 30.97
    },
    {
     "id": "t1e1",
     "zh": "T1 與 E1 的骨架",
     "en": "T1 & E1 Framing",
-    "start": 28.27,
+    "start": 30.97,
     "lead": 1.5,
-    "end": 61.89
+    "end": 66.63
    },
    {
     "id": "cas",
     "zh": "CAS 隨路信令",
     "en": "CAS: Channel Associated Signaling",
-    "start": 61.89,
+    "start": 66.63,
     "lead": 1.5,
-    "end": 95.98
+    "end": 103.62
    },
    {
     "id": "robbed",
     "zh": "T1 的位元竊取",
     "en": "T1 Robbed-Bit Signaling",
-    "start": 95.98,
+    "start": 103.62,
     "lead": 1.5,
-    "end": 127.38
+    "end": 137.64
    },
    {
     "id": "e1cas",
     "zh": "E1 CAS 與 R2",
     "en": "E1 CAS & R2",
-    "start": 127.38,
+    "start": 137.64,
     "lead": 1.5,
-    "end": 160.61
+    "end": 173.85
    },
    {
     "id": "ccs",
     "zh": "CCS 共路信令",
     "en": "CCS: Common Channel Signaling",
-    "start": 160.61,
+    "start": 173.85,
     "lead": 1.5,
-    "end": 197.73
+    "end": 215.23
    },
    {
     "id": "q931",
     "zh": "Q.931 通話流程",
     "en": "Q.931 Call Flow",
-    "start": 197.73,
+    "start": 215.23,
     "lead": 1.5,
-    "end": 226.4
+    "end": 248.82
    },
    {
     "id": "compare",
     "zh": "CAS 與 CCS 比較",
     "en": "CAS vs. CCS",
-    "start": 226.4,
+    "start": 248.82,
     "lead": 1.5,
-    "end": 254.23
+    "end": 279.44
    },
    {
     "id": "cfgcas",
     "zh": "設定實戰：CAS",
     "en": "Hands-on: Configuring CAS",
-    "start": 254.23,
+    "start": 279.44,
     "lead": 1.5,
-    "end": 286.29
+    "end": 315.62
    },
    {
     "id": "cfgpri",
     "zh": "設定實戰：PRI 與驗證",
     "en": "Hands-on: PRI & Verification",
-    "start": 286.29,
+    "start": 315.62,
     "lead": 1.5,
-    "end": 329.89
+    "end": 366.391
    }
   ],
   "sentences": [
@@ -166,7 +166,7 @@ window.CASCCS_DATA = {
     "c": 0,
     "k": 0,
     "start": 4.5,
-    "end": 9.08,
+    "end": 9.71,
     "zh": "拿起話筒、撥號、對方響鈴，接著通話，最後掛斷。",
     "en": "Lift the handset, dial, the far end rings, you talk, and finally hang up."
    },
@@ -174,8 +174,8 @@ window.CASCCS_DATA = {
     "n": 1,
     "c": 0,
     "k": 1,
-    "start": 9.44,
-    "end": 14.65,
+    "start": 10.07,
+    "end": 15.76,
     "zh": "除了聲音，線路還得傳遞這些控制訊息，也就是信令 Signaling。",
     "en": "Besides the voice, the line must carry these control messages. That is signaling."
    },
@@ -183,8 +183,8 @@ window.CASCCS_DATA = {
     "n": 2,
     "c": 0,
     "k": 2,
-    "start": 15.01,
-    "end": 20.94,
+    "start": 16.12,
+    "end": 23.35,
     "zh": "在數位中繼線上，信令主要有兩種：隨路信令 CAS 與共路信令 CCS。",
     "en": "On digital trunks there are two main kinds: Channel Associated Signaling (CAS) and Common Channel Signaling (CCS)."
    },
@@ -192,8 +192,8 @@ window.CASCCS_DATA = {
     "n": 3,
     "c": 0,
     "k": 3,
-    "start": 21.3,
-    "end": 27.47,
+    "start": 23.71,
+    "end": 30.17,
     "zh": "差別在於：信令是跟著每個語音通道走，還是集中在一條專用通道。",
     "en": "The difference: does signaling ride with each voice channel, or gather on one dedicated channel?"
    },
@@ -201,8 +201,8 @@ window.CASCCS_DATA = {
     "n": 4,
     "c": 1,
     "k": 0,
-    "start": 29.77,
-    "end": 34.89,
+    "start": 32.47,
+    "end": 38.91,
     "zh": "先認識載體：T1 有 24 個時槽，每個 DS0 是 64 kbps。",
     "en": "First, the carrier: a T1 has 24 timeslots, each a 64 kbps DS0."
    },
@@ -210,8 +210,8 @@ window.CASCCS_DATA = {
     "n": 5,
     "c": 1,
     "k": 1,
-    "start": 35.25,
-    "end": 41.93,
+    "start": 39.27,
+    "end": 46.48,
     "zh": "一個訊框有 193 位元，每秒 8000 個訊框，總速率 1.544 Mbps。",
     "en": "A frame is 193 bits, 8,000 frames per second, for 1.544 Mbps in total."
    },
@@ -219,8 +219,8 @@ window.CASCCS_DATA = {
     "n": 6,
     "c": 1,
     "k": 2,
-    "start": 42.29,
-    "end": 46.9,
+    "start": 46.84,
+    "end": 51.33,
     "zh": "多出來的那 1 個位元，是做訊框同步用的 framing bit。",
     "en": "The one extra bit is the framing bit, used for frame synchronization."
    },
@@ -228,8 +228,8 @@ window.CASCCS_DATA = {
     "n": 7,
     "c": 1,
     "k": 3,
-    "start": 47.26,
-    "end": 51.87,
+    "start": 51.69,
+    "end": 56.7,
     "zh": "E1 則有 32 個時槽，總速率 2.048 Mbps。",
     "en": "An E1 has 32 timeslots, for 2.048 Mbps in total."
    },
@@ -237,8 +237,8 @@ window.CASCCS_DATA = {
     "n": 8,
     "c": 1,
     "k": 4,
-    "start": 52.23,
-    "end": 56.75,
+    "start": 57.06,
+    "end": 61.9,
     "zh": "時槽 0 負責訊框同步，時槽 16 通常保留給信令。",
     "en": "Timeslot 0 handles frame alignment; timeslot 16 is usually reserved for signaling."
    },
@@ -246,8 +246,8 @@ window.CASCCS_DATA = {
     "n": 9,
     "c": 1,
     "k": 5,
-    "start": 57.11,
-    "end": 61.09,
+    "start": 62.26,
+    "end": 65.83,
     "zh": "所以一條 E1，一般可以承載 30 路語音。",
     "en": "So an E1 typically carries 30 voice channels."
    },
@@ -255,8 +255,8 @@ window.CASCCS_DATA = {
     "n": 10,
     "c": 2,
     "k": 0,
-    "start": 63.39,
-    "end": 67.4,
+    "start": 68.13,
+    "end": 72.33,
     "zh": "CAS 的意思是：信令跟著每一個語音通道走。",
     "en": "CAS means signaling travels with each individual voice channel."
    },
@@ -264,8 +264,8 @@ window.CASCCS_DATA = {
     "n": 11,
     "c": 2,
     "k": 1,
-    "start": 67.76,
-    "end": 72.52,
+    "start": 72.69,
+    "end": 77.75,
     "zh": "每一路都有自己的狀態位元，用來表示摘機或掛機。",
     "en": "Every channel has its own state bits, indicating off-hook or on-hook."
    },
@@ -273,8 +273,8 @@ window.CASCCS_DATA = {
     "n": 12,
     "c": 2,
     "k": 2,
-    "start": 72.88,
-    "end": 77.58,
+    "start": 78.11,
+    "end": 83.08,
     "zh": "常見的線路信令有 Loop Start、Ground Start，以及 E&M。",
     "en": "Common line signaling types are Loop Start, Ground Start, and E&M."
    },
@@ -282,8 +282,8 @@ window.CASCCS_DATA = {
     "n": 13,
     "c": 2,
     "k": 3,
-    "start": 77.94,
-    "end": 82.22,
+    "start": 83.44,
+    "end": 88.5,
     "zh": "E&M 又分成 Immediate、Wink、Delay Dial 等啟動方式。",
     "en": "E&M has start modes such as Immediate, Wink, and Delay Dial."
    },
@@ -291,8 +291,8 @@ window.CASCCS_DATA = {
     "n": 14,
     "c": 2,
     "k": 4,
-    "start": 82.58,
-    "end": 85.78,
+    "start": 88.86,
+    "end": 92.29,
     "zh": "以 Wink Start 為例：一端先佔用線路，",
     "en": "Take Wink Start: one side seizes the line first,"
    },
@@ -300,8 +300,8 @@ window.CASCCS_DATA = {
     "n": 15,
     "c": 2,
     "k": 5,
-    "start": 86.14,
-    "end": 89.94,
+    "start": 92.65,
+    "end": 96.62,
     "zh": "對端回一個短暫的 wink，才開始送出號碼。",
     "en": "the far end answers with a brief wink, and only then are digits sent."
    },
@@ -309,8 +309,8 @@ window.CASCCS_DATA = {
     "n": 16,
     "c": 2,
     "k": 6,
-    "start": 90.3,
-    "end": 95.18,
+    "start": 96.98,
+    "end": 102.82,
     "zh": "號碼本身，通常用 DTMF 或 MF 音頻，在語音通道內傳送。",
     "en": "The digits themselves are usually sent in-band, as DTMF or MF tones."
    },
@@ -318,8 +318,8 @@ window.CASCCS_DATA = {
     "n": 17,
     "c": 3,
     "k": 0,
-    "start": 97.48,
-    "end": 101.79,
+    "start": 105.12,
+    "end": 109.7,
     "zh": "那 T1 的狀態位元放在哪裡？答案是：借來的。",
     "en": "So where do T1 state bits live? The answer: they are borrowed."
    },
@@ -327,8 +327,8 @@ window.CASCCS_DATA = {
     "n": 18,
     "c": 3,
     "k": 1,
-    "start": 102.15,
-    "end": 105.71,
+    "start": 110.06,
+    "end": 114.04,
     "zh": "在 SF 超訊框的第 6 與第 12 個訊框，",
     "en": "In the SF superframe, in frames 6 and 12,"
    },
@@ -336,8 +336,8 @@ window.CASCCS_DATA = {
     "n": 19,
     "c": 3,
     "k": 2,
-    "start": 106.07,
-    "end": 110.95,
+    "start": 114.4,
+    "end": 118.95,
     "zh": "每個時槽的最低位元，會被拿去當 A、B 信令位元。",
     "en": "the least significant bit of every timeslot becomes the A and B signaling bits."
    },
@@ -345,8 +345,8 @@ window.CASCCS_DATA = {
     "n": 20,
     "c": 3,
     "k": 3,
-    "start": 111.31,
-    "end": 117.78,
+    "start": 119.31,
+    "end": 126.04,
     "zh": "ESF 則在第 6、12、18、24 個訊框，提供 A、B、C、D 四個位元。",
     "en": "ESF uses frames 6, 12, 18, and 24, providing four bits: A, B, C, and D."
    },
@@ -354,8 +354,8 @@ window.CASCCS_DATA = {
     "n": 21,
     "c": 3,
     "k": 4,
-    "start": 118.14,
-    "end": 120.86,
+    "start": 126.4,
+    "end": 129.97,
     "zh": "這就是 Robbed-Bit Signaling，位元竊取。",
     "en": "This is called robbed-bit signaling."
    },
@@ -363,8 +363,8 @@ window.CASCCS_DATA = {
     "n": 22,
     "c": 3,
     "k": 5,
-    "start": 121.22,
-    "end": 126.58,
+    "start": 130.33,
+    "end": 136.84,
     "zh": "對語音幾乎聽不出差別，但資料傳輸只能安全使用 56 kbps。",
     "en": "Voice barely notices, but data can only safely use 56 kbps."
    },
@@ -372,8 +372,8 @@ window.CASCCS_DATA = {
     "n": 23,
     "c": 4,
     "k": 0,
-    "start": 128.88,
-    "end": 133.37,
+    "start": 139.14,
+    "end": 144.17,
     "zh": "E1 的 CAS 不偷位元，而是把信令放在時槽 16。",
     "en": "E1 CAS doesn't rob bits; it places signaling in timeslot 16."
    },
@@ -381,8 +381,8 @@ window.CASCCS_DATA = {
     "n": 24,
     "c": 4,
     "k": 1,
-    "start": 133.73,
-    "end": 139.09,
+    "start": 144.53,
+    "end": 150.18,
     "zh": "16 個訊框組成一個多訊框，第 0 個訊框負責多訊框同步。",
     "en": "Sixteen frames form a multiframe; frame 0 carries the multiframe alignment."
    },
@@ -390,8 +390,8 @@ window.CASCCS_DATA = {
     "n": 25,
     "c": 4,
     "k": 2,
-    "start": 139.45,
-    "end": 144.63,
+    "start": 150.54,
+    "end": 156.72,
     "zh": "其餘 15 個訊框，每個帶兩路的 ABCD 位元，剛好涵蓋 30 路。",
     "en": "Each of the other 15 frames carries ABCD bits for two channels, covering all 30."
    },
@@ -399,8 +399,8 @@ window.CASCCS_DATA = {
     "n": 26,
     "c": 4,
     "k": 3,
-    "start": 144.99,
-    "end": 150.62,
+    "start": 157.08,
+    "end": 163.36,
     "zh": "雖然位置集中，但每組位元固定對應某一路，所以仍然是 CAS。",
     "en": "Though grouped together, each bit group maps to a fixed channel, so it is still CAS."
    },
@@ -408,8 +408,8 @@ window.CASCCS_DATA = {
     "n": 27,
     "c": 4,
     "k": 4,
-    "start": 150.98,
-    "end": 155.53,
+    "start": 163.72,
+    "end": 168.5,
     "zh": "常見的 MFC-R2，就是用這些位元做線路信令，",
     "en": "The widely used MFC-R2 uses these bits for line signaling,"
    },
@@ -417,8 +417,8 @@ window.CASCCS_DATA = {
     "n": 28,
     "c": 4,
     "k": 5,
-    "start": 155.89,
-    "end": 159.81,
+    "start": 168.86,
+    "end": 173.05,
     "zh": "再用語音通道內的多頻互控音，傳遞號碼。",
     "en": "and compelled multi-frequency tones inside the voice channel to pass the digits."
    },
@@ -426,8 +426,8 @@ window.CASCCS_DATA = {
     "n": 29,
     "c": 5,
     "k": 0,
-    "start": 162.11,
-    "end": 167.74,
+    "start": 175.35,
+    "end": 181.08,
     "zh": "CCS 換了一個思路：把所有通道的信令，集中在一條專用通道。",
     "en": "CCS takes another approach: signaling for all channels goes on one dedicated channel."
    },
@@ -435,8 +435,8 @@ window.CASCCS_DATA = {
     "n": 30,
     "c": 5,
     "k": 1,
-    "start": 168.1,
-    "end": 172.23,
+    "start": 181.44,
+    "end": 185.74,
     "zh": "信令不再只是幾個位元，而是有結構的訊息。",
     "en": "Signaling is no longer just a few bits, but structured messages."
    },
@@ -444,8 +444,8 @@ window.CASCCS_DATA = {
     "n": 31,
     "c": 5,
     "k": 2,
-    "start": 172.59,
-    "end": 176.99,
+    "start": 186.1,
+    "end": 191.47,
     "zh": "在企業常見的 ISDN PRI 裡，這條通道叫做 D 通道。",
     "en": "In ISDN PRI, common in enterprises, this channel is called the D channel."
    },
@@ -453,8 +453,8 @@ window.CASCCS_DATA = {
     "n": 32,
     "c": 5,
     "k": 3,
-    "start": 177.35,
-    "end": 181.57,
+    "start": 191.83,
+    "end": 196.88,
     "zh": "T1 PRI 是 23B+D，D 通道在時槽 24。",
     "en": "T1 PRI is 23B+D, with the D channel on timeslot 24."
    },
@@ -462,8 +462,8 @@ window.CASCCS_DATA = {
     "n": 33,
     "c": 5,
     "k": 4,
-    "start": 181.93,
-    "end": 186.15,
+    "start": 197.24,
+    "end": 201.85,
     "zh": "E1 PRI 是 30B+D，D 通道在時槽 16。",
     "en": "E1 PRI is 30B+D, with the D channel on timeslot 16."
    },
@@ -471,8 +471,8 @@ window.CASCCS_DATA = {
     "n": 34,
     "c": 5,
     "k": 5,
-    "start": 186.51,
-    "end": 191.27,
+    "start": 202.21,
+    "end": 207.88,
     "zh": "電信業者之間，則使用另一套 CCS：七號信令 SS7。",
     "en": "Between carriers, another CCS system is used: Signaling System No. 7, or SS7."
    },
@@ -480,8 +480,8 @@ window.CASCCS_DATA = {
     "n": 35,
     "c": 5,
     "k": 6,
-    "start": 191.63,
-    "end": 196.93,
+    "start": 208.24,
+    "end": 214.43,
     "zh": "對網路工程師來說，這很像 SIP 與 RTP：信令和媒體分開走。",
     "en": "For network engineers, it is much like SIP and RTP: signaling and media travel separately."
    },
@@ -489,8 +489,8 @@ window.CASCCS_DATA = {
     "n": 36,
     "c": 6,
     "k": 0,
-    "start": 199.23,
-    "end": 204.89,
+    "start": 216.73,
+    "end": 223.33,
     "zh": "D 通道的第二層是 Q.921，也就是 LAPD；第三層是 Q.931。",
     "en": "The D channel runs Q.921, also known as LAPD, at Layer 2, and Q.931 at Layer 3."
    },
@@ -498,8 +498,8 @@ window.CASCCS_DATA = {
     "n": 37,
     "c": 6,
     "k": 1,
-    "start": 205.25,
-    "end": 209.98,
+    "start": 223.69,
+    "end": 228.64,
     "zh": "發話端送出 SETUP，帶著被叫號碼與要使用的 B 通道。",
     "en": "The calling side sends SETUP, carrying the called number and the B channel to use."
    },
@@ -507,8 +507,8 @@ window.CASCCS_DATA = {
     "n": 38,
     "c": 6,
     "k": 2,
-    "start": 210.34,
-    "end": 214.11,
+    "start": 229.0,
+    "end": 233.71,
     "zh": "對端回 CALL PROCEEDING，接著用 ALERTING 表示正在響鈴。",
     "en": "The far end replies CALL PROCEEDING, then ALERTING while the phone rings."
    },
@@ -516,8 +516,8 @@ window.CASCCS_DATA = {
     "n": 39,
     "c": 6,
     "k": 3,
-    "start": 214.47,
-    "end": 218.03,
+    "start": 234.07,
+    "end": 238.48,
     "zh": "對方接聽時送出 CONNECT，再以 CONNECT ACK 確認。",
     "en": "When answered, it sends CONNECT, confirmed with CONNECT ACK."
    },
@@ -525,8 +525,8 @@ window.CASCCS_DATA = {
     "n": 40,
     "c": 6,
     "k": 4,
-    "start": 218.39,
-    "end": 221.35,
+    "start": 238.84,
+    "end": 243.29,
     "zh": "掛斷則依序是 DISCONNECT、RELEASE、RELEASE COMPLETE。",
     "en": "Hang-up follows DISCONNECT, RELEASE, then RELEASE COMPLETE."
    },
@@ -534,8 +534,8 @@ window.CASCCS_DATA = {
     "n": 41,
     "c": 6,
     "k": 5,
-    "start": 221.71,
-    "end": 225.6,
+    "start": 243.65,
+    "end": 248.02,
     "zh": "拆線訊息都帶有 Cause Code，排錯時非常好用。",
     "en": "Clearing messages carry a cause code, which is very handy for troubleshooting."
    },
@@ -543,8 +543,8 @@ window.CASCCS_DATA = {
     "n": 42,
     "c": 7,
     "k": 0,
-    "start": 227.9,
-    "end": 229.99,
+    "start": 250.32,
+    "end": 252.59,
     "zh": "把兩者並排比較一下。",
     "en": "Let's compare the two side by side."
    },
@@ -552,8 +552,8 @@ window.CASCCS_DATA = {
     "n": 43,
     "c": 7,
     "k": 1,
-    "start": 230.35,
-    "end": 234.51,
+    "start": 252.95,
+    "end": 257.85,
     "zh": "CAS 簡單、相容老設備，但能傳遞的資訊有限。",
     "en": "CAS is simple and compatible with legacy equipment, but carries limited information."
    },
@@ -561,8 +561,8 @@ window.CASCCS_DATA = {
     "n": 44,
     "c": 7,
     "k": 2,
-    "start": 234.87,
-    "end": 239.03,
+    "start": 258.21,
+    "end": 262.94,
     "zh": "CCS 能傳送來電號碼、失敗原因等豐富資訊，",
     "en": "CCS can carry rich information such as calling number and failure cause,"
    },
@@ -570,8 +570,8 @@ window.CASCCS_DATA = {
     "n": 45,
     "c": 7,
     "k": 3,
-    "start": 239.39,
-    "end": 243.01,
+    "start": 263.3,
+    "end": 267.59,
     "zh": "而且每個 B 通道都保有完整的 64 kbps。",
     "en": "and every B channel keeps the full, clear 64 kbps."
    },
@@ -579,8 +579,8 @@ window.CASCCS_DATA = {
     "n": 46,
     "c": 7,
     "k": 4,
-    "start": 243.37,
-    "end": 248.58,
+    "start": 267.95,
+    "end": 273.44,
     "zh": "代價是 T1 PRI 要讓出一個時槽給 D 通道，只剩 23 路。",
     "en": "The trade-off: T1 PRI gives one timeslot to the D channel, leaving 23 bearers."
    },
@@ -588,8 +588,8 @@ window.CASCCS_DATA = {
     "n": 47,
     "c": 7,
     "k": 5,
-    "start": 248.94,
-    "end": 253.43,
+    "start": 273.8,
+    "end": 278.64,
     "zh": "不過透過 NFAS，一條 D 通道可以控制多條 T1。",
     "en": "But with NFAS, a single D channel can control multiple T1s."
    },
@@ -597,8 +597,8 @@ window.CASCCS_DATA = {
     "n": 48,
     "c": 8,
     "k": 0,
-    "start": 255.73,
-    "end": 259.86,
+    "start": 280.94,
+    "end": 285.23,
     "zh": "動手設定前，先跟電信業者或對端確認參數。",
     "en": "Before configuring, confirm the parameters with the carrier or the far end."
    },
@@ -606,8 +606,8 @@ window.CASCCS_DATA = {
     "n": 49,
     "c": 8,
     "k": 1,
-    "start": 260.22,
-    "end": 266.12,
+    "start": 285.59,
+    "end": 292.78,
     "zh": "T1 要確認訊框是 SF 還是 ESF，線路編碼是 AMI 還是 B8ZS。",
     "en": "For T1: framing SF or ESF, and line coding AMI or B8ZS."
    },
@@ -615,8 +615,8 @@ window.CASCCS_DATA = {
     "n": 50,
     "c": 8,
     "k": 2,
-    "start": 266.48,
-    "end": 271.57,
+    "start": 293.14,
+    "end": 298.89,
     "zh": "E1 要確認是否啟用 CRC4，線路編碼通常是 HDB3。",
     "en": "For E1: whether CRC4 is enabled; line coding is usually HDB3."
    },
@@ -624,8 +624,8 @@ window.CASCCS_DATA = {
     "n": 51,
     "c": 8,
     "k": 3,
-    "start": 271.93,
-    "end": 275.31,
+    "start": 299.25,
+    "end": 303.0,
     "zh": "時脈來源通常設為 line，跟隨電信端。",
     "en": "Clock source is usually set to line, following the carrier."
    },
@@ -633,8 +633,8 @@ window.CASCCS_DATA = {
     "n": 52,
     "c": 8,
     "k": 4,
-    "start": 275.67,
-    "end": 280.85,
+    "start": 303.36,
+    "end": 309.78,
     "zh": "以 Cisco IOS 為例，CAS 用 ds0-group 指定時槽與信令類型。",
     "en": "In Cisco IOS, CAS uses ds0-group to set the timeslots and signaling type."
    },
@@ -642,8 +642,8 @@ window.CASCCS_DATA = {
     "n": 53,
     "c": 8,
     "k": 5,
-    "start": 281.21,
-    "end": 285.49,
+    "start": 310.14,
+    "end": 314.82,
     "zh": "系統會產生對應的 voice-port，再用 dial-peer 指向它。",
     "en": "This creates a matching voice-port, and a dial-peer then points to it."
    },
@@ -651,8 +651,8 @@ window.CASCCS_DATA = {
     "n": 54,
     "c": 9,
     "k": 0,
-    "start": 287.79,
-    "end": 292.01,
+    "start": 317.12,
+    "end": 322.31,
     "zh": "如果是 PRI，先設定 ISDN switch-type，要與對端一致。",
     "en": "For PRI, first set the ISDN switch-type to match the far end."
    },
@@ -660,8 +660,8 @@ window.CASCCS_DATA = {
     "n": 55,
     "c": 9,
     "k": 1,
-    "start": 292.37,
-    "end": 295.3,
+    "start": 322.67,
+    "end": 326.44,
     "zh": "在 controller 底下，用 pri-group 指定時槽。",
     "en": "Under the controller, use pri-group to specify the timeslots."
    },
@@ -669,8 +669,8 @@ window.CASCCS_DATA = {
     "n": 56,
     "c": 9,
     "k": 2,
-    "start": 295.66,
-    "end": 302.16,
+    "start": 326.8,
+    "end": 333.27,
     "zh": "T1 會產生 Serial 介面 :23，E1 則是 :15，代表 D 通道。",
     "en": "T1 creates a Serial interface ending in :23, E1 one ending in :15; it represents the D channel."
    },
@@ -678,8 +678,8 @@ window.CASCCS_DATA = {
     "n": 57,
     "c": 9,
     "k": 3,
-    "start": 302.52,
-    "end": 306.56,
+    "start": 333.63,
+    "end": 339.36,
     "zh": "用 show isdn status 驗證，第二層應顯示 MULTIPLE_FRAME_ESTABLISHED。",
     "en": "Verify with show isdn status; Layer 2 should show MULTIPLE_FRAME_ESTABLISHED."
    },
@@ -687,8 +687,8 @@ window.CASCCS_DATA = {
     "n": 58,
     "c": 9,
     "k": 4,
-    "start": 306.92,
-    "end": 311.35,
+    "start": 339.72,
+    "end": 344.15,
     "zh": "如果出現 slips，多半是兩端時脈來源設定不一致。",
     "en": "If you see slips, the clock sources on the two ends are most likely mismatched."
    },
@@ -696,8 +696,8 @@ window.CASCCS_DATA = {
     "n": 59,
     "c": 9,
     "k": 5,
-    "start": 311.71,
-    "end": 316.44,
+    "start": 344.51,
+    "end": 351.74,
     "zh": "CAS 可用 debug vpm signal 觀察位元；PRI 則用 debug isdn q931。",
     "en": "For CAS, debug vpm signal shows the bits; for PRI, use debug isdn q931."
    },
@@ -705,8 +705,8 @@ window.CASCCS_DATA = {
     "n": 60,
     "c": 9,
     "k": 6,
-    "start": 316.8,
-    "end": 321.68,
+    "start": 352.1,
+    "end": 357.95,
     "zh": "記住：CAS 信令跟著通道走，CCS 信令集中在專用通道。",
     "en": "Remember: CAS signaling rides each channel; CCS gathers it on a dedicated channel."
    },
@@ -714,8 +714,8 @@ window.CASCCS_DATA = {
     "n": 61,
     "c": 9,
     "k": 7,
-    "start": 322.04,
-    "end": 326.59,
+    "start": 358.31,
+    "end": 363.091,
     "zh": "兩端參數對齊，就是穩定上線的第一步。謝謝收看！",
     "en": "Matching parameters on both ends is the first step to a stable link. Thanks for watching!"
    }
