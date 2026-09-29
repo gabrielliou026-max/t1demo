@@ -1,0 +1,431 @@
+<meta charset="utf-8">
+<title>視距無線電鏈路</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&family=Oxanium:wght@500;700&display=block">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #23244d;
+    --bg2: #2d2c5e;
+    --panel: #34336a;
+    --panel2: #3e3d78;
+    --line: #4a4884;
+    --ink: #fff7ec;
+    --mute: #d4ccff;
+    --dim: #a59ed8;
+    --cyan: #92d2ff;
+    --teal: #a2e7c6;
+    --amber: #ffd77e;
+    --violet: #c8b8ff;
+    --pink: #ffb3c9;
+    --sans: 'Noto Sans TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    --disp: 'Oxanium', 'Noto Sans TC', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font: 15px/1.6 var(--sans);
+    padding-inline: 16px;
+    padding-block: 28px 64px;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #4a4580 0%, rgba(74,69,128,0) 70%),
+      var(--bg);
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 28px; }
+  header { display: grid; gap: 6px; }
+  .eyebrow { font: 600 13px/1 var(--disp); letter-spacing: .28em; color: var(--cyan); text-transform: uppercase; }
+  h1 { margin: 0; font-size: clamp(28px, 4.2vw, 46px); line-height: 1.15; font-weight: 900; text-wrap: balance; }
+  h1 span { color: var(--mute); font-weight: 500; font-size: .5em; display: block; margin-top: 6px; letter-spacing: .01em; }
+  .lede { margin: 4px 0 0; color: var(--mute); max-width: 68ch; }
+  .notice {
+    display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border-radius: 10px;
+    background: rgba(255,215,126,.12); border: 1px solid rgba(255,215,126,.45); color: #ffe9b8; font-size: 14px;
+  }
+  .notice b { color: var(--amber); }
+
+  /* player */
+  .player { background: #1b1a3c; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+  .stage { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: #2b2d5e; cursor: pointer; }
+  .stage canvas { width: 100%; height: 100%; display: block; }
+  .bigplay {
+    position: absolute; inset: 0; margin: auto; width: 96px; height: 96px; border-radius: 50%;
+    border: 3px solid var(--ink); background: rgba(255,183,201,.92); color: #fff; box-shadow: 0 8px 0 rgba(0,0,0,.18);
+    display: grid; place-items: center; cursor: pointer; transition: transform .15s, opacity .2s;
+  }
+  .bigplay:hover { transform: scale(1.06); }
+  .bigplay svg { width: 38px; height: 38px; margin-left: 6px; }
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+    padding: 12px 14px; background: #2d2c5e; border-top: 1px solid var(--line);
+  }
+  .btn {
+    appearance: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    height: 36px; min-width: 36px; padding: 0 12px; border-radius: 12px; font: 600 14px var(--sans);
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;
+  }
+  .btn:hover { border-color: #33508f; background: var(--panel2); }
+  .btn:focus-visible, .seg button:focus-visible, .chap:focus-visible, .line:focus-visible, input[type=range]:focus-visible {
+    outline: 2px solid var(--cyan); outline-offset: 2px;
+  }
+  .btn svg { width: 16px; height: 16px; }
+  .time { font: 500 13px var(--mono); color: var(--mute); font-variant-numeric: tabular-nums; min-width: 104px; }
+  .seek { flex: 1 1 260px; position: relative; height: 26px; display: flex; align-items: center; }
+  .ticks { position: absolute; left: 0; right: 0; top: 50%; height: 6px; transform: translateY(-50%); display: flex; gap: 3px; pointer-events: none; }
+  .ticks i { display: block; height: 100%; border-radius: 3px; background: rgba(255,247,236,.2); position: relative; overflow: hidden; }
+  .ticks i b { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, var(--cyan), var(--teal), var(--amber)); }
+  .seek input { position: relative; width: 100%; margin: 0; background: transparent; appearance: none; height: 26px; cursor: pointer; }
+  .seek input::-webkit-slider-runnable-track { height: 6px; background: transparent; }
+  .seek input::-moz-range-track { height: 6px; background: transparent; }
+  .seek input::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; margin-top: -5px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 4px rgba(255,179,201,.6); }
+  .seek input::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--ink); }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .seg button {
+    appearance: none; border: 0; background: var(--panel); color: var(--mute); height: 34px; padding: 0 11px;
+    font: 600 13px var(--sans); cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button[aria-pressed="true"] { background: var(--amber); color: #4a3510; }
+  .ctl-label { font-size: 12px; color: var(--dim); letter-spacing: .08em; }
+  .now {
+    display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; padding: 10px 16px 14px; background: #262550; font-size: 14px;
+  }
+  .now .ch { font: 700 12px var(--disp); letter-spacing: .18em; color: var(--amber); }
+  .now .zh { font-weight: 700; }
+  .now .en { color: var(--mute); }
+
+  section h2 { margin: 0 0 4px; font-size: 22px; font-weight: 900; }
+  section .sub { margin: 0 0 16px; color: var(--mute); font-size: 14px; }
+
+  /* chapters */
+  .chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .chap {
+    appearance: none; text-align: left; cursor: pointer; color: var(--ink);
+    display: grid; grid-template-columns: 44px 1fr; gap: 2px 12px; align-items: center;
+    padding: 12px 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg2);
+    font: inherit;
+  }
+  .chap:hover { border-color: #33508f; }
+  .chap .n { grid-row: span 2; font: 700 22px var(--disp); color: var(--dim); }
+  .chap .t { font-weight: 800; font-size: 15px; line-height: 1.35; }
+  .chap .m { font-size: 12.5px; color: var(--mute); display: flex; justify-content: space-between; gap: 8px; }
+  .chap .m span:last-child { font-family: var(--mono); color: var(--dim); font-variant-numeric: tabular-nums; }
+  .chap[aria-current="true"] { border-color: var(--amber); background: var(--panel2); }
+  .chap[aria-current="true"] .n { color: var(--amber); }
+
+  /* characters */
+  .cast { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .card { border: 1px solid var(--line); border-radius: 20px; background: var(--bg2); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); }
+  .card canvas { width: 100%; height: auto; aspect-ratio: 520 / 340; display: block; background: radial-gradient(260px 160px at 50% 70%, #6b6fb2, #3a3a74); border-bottom: 1px solid var(--line); }
+  .card .body { padding: 14px 16px 16px; display: grid; gap: 4px; }
+  .card .name { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .card .name b { font-size: 18px; font-weight: 900; }
+  .card .name span { color: var(--mute); font-size: 14px; }
+  .card .role { font-size: 12px; letter-spacing: .06em; font-weight: 700; }
+  .card p { margin: 4px 0 0; font-size: 14px; }
+  .card p.en { color: var(--mute); font-size: 13px; margin-top: 2px; }
+
+  /* script */
+  details.script { border: 1px solid var(--line); border-radius: 18px; background: var(--bg2); }
+  details.script summary { cursor: pointer; padding: 14px 18px; font-weight: 800; font-size: 16px; }
+  details.script summary span { color: var(--mute); font-weight: 500; font-size: 14px; margin-left: 8px; }
+  .script-body { padding: 0 18px 18px; display: grid; gap: 18px; }
+  .script-ch h3 { margin: 0 0 6px; font-size: 15px; color: var(--cyan); font-weight: 800; }
+  .line {
+    appearance: none; display: grid; grid-template-columns: 58px 1fr; gap: 2px 12px; width: 100%; text-align: left;
+    padding: 7px 10px; border: 0; border-radius: 8px; background: transparent; color: var(--ink); font: inherit; cursor: pointer;
+  }
+  .line:hover { background: rgba(255,247,236,.06); }
+  .line[aria-current="true"] { background: rgba(255,215,126,.16); }
+  .line .ts { grid-row: span 2; font: 500 12px var(--mono); color: var(--dim); padding-top: 3px; font-variant-numeric: tabular-nums; }
+  .line .en { color: var(--mute); font-size: 13.5px; }
+  footer { color: var(--dim); font-size: 13px; }
+  @media (max-width: 640px) {
+    .time { min-width: 0; }
+    .ctl-label { display: none; }
+    .bigplay { width: 72px; height: 72px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .bigplay { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Line-of-Sight Radio Links</div>
+    <h1>視距無線電鏈路<span>頻率與通聯可達率 · Frequency &amp; Link Availability</span></h1>
+    <p class="lede">從自由空間路徑損耗、菲涅爾區淨空、多路徑衰落、植被與天氣，到城市、森林、水面與山區的選頻比較。中英雙語動畫，點下方章節可直接跳轉。</p>
+  </header>
+
+  <div class="notice" id="notice" hidden>
+    <span>ℹ︎</span>
+    <span><b>目前是配樂版。</b>旁白語音（Gemini TTS）尚未產生，字幕時間依預估語速排定；語音產生後會替換成正式版本。</span>
+  </div>
+
+  <div class="player" id="player">
+    <div class="stage" id="stage">
+      <canvas id="screen" width="1920" height="1080" aria-label="視距無線電鏈路動畫畫面"></canvas>
+      <button class="bigplay" id="bigplay" aria-label="播放">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg>
+      </button>
+    </div>
+    <div class="controls">
+      <button class="btn" id="play" aria-label="播放">
+        <svg id="icoPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg>
+        <svg id="icoPause" viewBox="0 0 24 24" fill="currentColor" hidden><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+      </button>
+      <div class="time" id="time">00:00 / 00:00</div>
+      <div class="seek">
+        <div class="ticks" id="ticks"></div>
+        <input type="range" id="seek" min="0" max="100" step="0.05" value="0" aria-label="播放位置">
+      </div>
+      <span class="ctl-label">字幕</span>
+      <div class="seg" role="group" aria-label="字幕模式">
+        <button id="sub-both" data-mode="both" aria-pressed="true">中英</button>
+        <button id="sub-zh" data-mode="zh" aria-pressed="false">中文</button>
+        <button id="sub-en" data-mode="en" aria-pressed="false">EN</button>
+        <button id="sub-off" data-mode="off" aria-pressed="false">關</button>
+      </div>
+      <button class="btn" id="mute" aria-label="靜音">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path id="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>
+      </button>
+      <button class="btn" id="fs" aria-label="全螢幕">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      </button>
+    </div>
+    <div class="now" id="now"><span class="ch" id="nowCh">CH 01</span><span class="zh" id="nowZh"></span><span class="en" id="nowEn"></span></div>
+  </div>
+
+  <section>
+    <h2>章節</h2>
+    <p class="sub">Chapters · 點一下跳到該章節開始播放</p>
+    <div class="chapters" id="chapters"></div>
+  </section>
+
+  <section>
+    <h2>角色介紹</h2>
+    <p class="sub">Characters · 影片中的角色，全部用 Three.js 原生幾何體（Box、Cylinder、Sphere、Cone、Capsule…）組成</p>
+    <div class="cast" id="cast"></div>
+  </section>
+
+  <details class="script" id="scriptBox">
+    <summary>完整旁白腳本<span>Bilingual narration script · 點句子可跳轉</span></summary>
+    <div class="script-body" id="script"></div>
+  </details>
+
+  <footer>動畫、角色與配樂皆為原創，以 Three.js 與程式即時生成。數字為套用公式的示範計算，實際鏈路請以鏈路預算工具與現地會勘確認。</footer>
+</div>
+
+<audio id="audio" src="audio.mp3" preload="auto"></audio>
+<script src="vendor/three.min.js"></script>
+<script src="data.js" charset="utf-8"></script>
+<script src="engine.js" charset="utf-8"></script>
+<script>
+(() => {
+  const D = window.CASCCS_DATA, TL = D.timeline;
+  const $ = (id) => document.getElementById(id);
+  const canvas = $('screen'), audio = $('audio');
+  const app = CASCCS.create(canvas, D);
+  const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const store = {
+    get(k, d) { try { return localStorage.getItem(k) ?? d; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+  };
+
+  if (!TL.narrated) $('notice').hidden = false;
+
+  // ---- state & clock ----
+  let t = 0, playing = false, last = performance.now(), mode = store.get('casccs-subs', 'both'), dirty = true;
+  const seek = $('seek');
+  seek.max = TL.duration;
+
+  function setMode(m) {
+    mode = m;
+    document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+    store.set('casccs-subs', m);
+    dirty = true;
+  }
+  document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  setMode(mode);
+
+  function setPlaying(p) {
+    playing = p;
+    $('icoPlay').hidden = p; $('icoPause').hidden = !p;
+    $('play').setAttribute('aria-label', p ? '暫停' : '播放');
+    $('bigplay').style.opacity = p ? 0 : 1;
+    $('bigplay').style.pointerEvents = p ? 'none' : 'auto';
+    if (p) {
+      if (t >= TL.duration - 0.05) jump(0);
+      try { audio.currentTime = t; } catch (e) {}
+      const pr = audio.play();
+      if (pr && pr.catch) pr.catch(() => {});
+    } else {
+      audio.pause();
+    }
+    last = performance.now();
+  }
+  function jump(to, andPlay) {
+    t = Math.max(0, Math.min(TL.duration, to));
+    try { audio.currentTime = t; } catch (e) {}
+    dirty = true;
+    if (andPlay && !playing) setPlaying(true);
+  }
+  $('play').addEventListener('click', () => setPlaying(!playing));
+  $('bigplay').addEventListener('click', (e) => { e.stopPropagation(); setPlaying(true); });
+  $('stage').addEventListener('click', () => setPlaying(!playing));
+  seek.addEventListener('input', () => jump(Number(seek.value)));
+  $('mute').addEventListener('click', () => {
+    audio.muted = !audio.muted;
+    $('wave').style.opacity = audio.muted ? 0.15 : 1;
+    $('mute').setAttribute('aria-label', audio.muted ? '取消靜音' : '靜音');
+  });
+  $('fs').addEventListener('click', () => {
+    const el = $('player');
+    const p = document.fullscreenElement ? document.exitFullscreen() : (el.requestFullscreen && el.requestFullscreen());
+    if (p && p.catch) p.catch(() => {});
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.target.closest('input, textarea, select')) return;
+    if (e.code === 'Space') { e.preventDefault(); setPlaying(!playing); }
+    if (e.code === 'ArrowRight') jump(t + 5);
+    if (e.code === 'ArrowLeft') jump(t - 5);
+  });
+  audio.addEventListener('ended', () => { t = TL.duration; setPlaying(false); });
+
+  // ---- chapter ticks, list ----
+  const ticks = $('ticks');
+  TL.chapters.forEach((c) => {
+    const i = document.createElement('i');
+    i.style.flex = String(c.end - c.start);
+    i.appendChild(document.createElement('b'));
+    ticks.appendChild(i);
+  });
+  const chapBox = $('chapters');
+  TL.chapters.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.className = 'chap';
+    b.id = 'chap-' + c.id;
+    b.innerHTML = `<span class="n">${String(i + 1).padStart(2, '0')}</span><span class="t"></span><span class="m"><span></span><span>${fmt(c.start)}</span></span>`;
+    b.querySelector('.t').textContent = c.zh;
+    b.querySelector('.m span').textContent = c.en;
+    b.addEventListener('click', () => { jump(c.start, true); $('player').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    chapBox.appendChild(b);
+  });
+
+  // ---- script ----
+  const scriptBox = $('script');
+  const lineEls = [];
+  TL.chapters.forEach((c, ci) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'script-ch';
+    const h = document.createElement('h3');
+    h.textContent = `${String(ci + 1).padStart(2, '0')} · ${c.zh} — ${c.en}`;
+    wrap.appendChild(h);
+    TL.sentences.filter((s) => s.c === ci).forEach((s) => {
+      const b = document.createElement('button');
+      b.className = 'line';
+      b.innerHTML = `<span class="ts">${fmt(s.start)}</span><span class="zh"></span><span class="en"></span>`;
+      b.querySelector('.zh').textContent = s.zh;
+      b.querySelector('.en').textContent = s.en;
+      b.addEventListener('click', () => { jump(s.start - 0.1, true); $('player').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+      lineEls[s.n] = b;
+      wrap.appendChild(b);
+    });
+    scriptBox.appendChild(wrap);
+  });
+
+  // ---- characters ----
+  const studio = CASCCS.studio(520, 340);
+  const cast = $('cast'), cards = [];
+  D.characters.forEach((c) => {
+    const col = CASCCS.CHAR_COLOR[c.id] || '#3fe2ff';
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `<canvas width="520" height="340" aria-hidden="true"></canvas>
+      <div class="body"><div class="role"></div><div class="name"><b></b><span></span></div><p class="zh"></p><p class="en"></p></div>`;
+    el.querySelector('.role').textContent = `${c.roleZh} · ${c.roleEn}`;
+    el.querySelector('.role').style.color = col;
+    el.querySelector('.name b').textContent = c.zh;
+    el.querySelector('.name span').textContent = c.en;
+    el.querySelector('p.zh').textContent = c.descZh;
+    el.querySelector('p.en').textContent = c.descEn;
+    cast.appendChild(el);
+    cards.push({ id: c.id, ctx: el.querySelector('canvas').getContext('2d'), el });
+  });
+  // Render the 3D portraits at ~15 fps, only for cards on screen.
+  const onScreen = new Set();
+  const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => {
+    const c = cards.find((k) => k.el === e.target);
+    if (e.isIntersecting) onScreen.add(c); else onScreen.delete(c);
+  })) : null;
+  cards.forEach((c) => (io ? io.observe(c.el) : onScreen.add(c)));
+  let lastCards = -1, firstPass = true;
+  function drawCards(now) {
+    if (now - lastCards < 66) return;
+    lastCards = now;
+    const tt = now / 1000;
+    (firstPass ? cards : onScreen).forEach((c) => {
+      const img = studio.render(c.id, tt);
+      c.ctx.clearRect(0, 0, 520, 340);
+      c.ctx.drawImage(img, 0, 0);
+    });
+    firstPass = false;
+  }
+
+  // ---- UI sync ----
+  let lastCh = -1, lastLine = -1;
+  function syncUI() {
+    seek.value = t;
+    $('time').textContent = `${fmt(t)} / ${fmt(TL.duration)}`;
+    let ci = TL.chapters.findIndex((c) => t >= c.start && t < c.end);
+    if (ci < 0) ci = TL.chapters.length - 1;
+    [...ticks.children].forEach((el, i) => {
+      const c = TL.chapters[i];
+      el.firstChild.style.width = `${Math.max(0, Math.min(1, (t - c.start) / (c.end - c.start))) * 100}%`;
+    });
+    if (ci !== lastCh) {
+      lastCh = ci;
+      const c = TL.chapters[ci];
+      $('nowCh').textContent = `CH ${String(ci + 1).padStart(2, '0')}`;
+      $('nowZh').textContent = c.zh;
+      $('nowEn').textContent = c.en;
+      chapBox.querySelectorAll('.chap').forEach((b, i) => b.setAttribute('aria-current', String(i === ci)));
+    }
+    const s = app.activeSentence(t);
+    const n = s ? s.n : -1;
+    if (n !== lastLine) {
+      if (lineEls[lastLine]) lineEls[lastLine].removeAttribute('aria-current');
+      if (lineEls[n]) lineEls[n].setAttribute('aria-current', 'true');
+      lastLine = n;
+    }
+  }
+
+  function frame(now) {
+    const dt = Math.min(0.1, (now - last) / 1000);
+    last = now;
+    if (playing) {
+      if (!audio.paused && audio.readyState >= 2 && !audio.seeking) t = audio.currentTime;
+      else t += dt;
+      if (t >= TL.duration) { t = TL.duration; setPlaying(false); }
+      dirty = true;
+    }
+    if (dirty) { app.render(t, { subs: mode }); syncUI(); dirty = false; }
+    drawCards(now);
+    requestAnimationFrame(frame);
+  }
+
+  // Load the glyphs the canvas needs before the first real frame.
+  const sample = JSON.stringify(D);
+  const faces = ['400', '500', '700', '900'].map((w) => `${w} 20px 'Noto Sans TC'`)
+    .concat(["400 20px 'JetBrains Mono'", "700 20px 'JetBrains Mono'", "500 20px 'Oxanium'", "700 20px 'Oxanium'"]);
+  const engineText = fetch('engine.js').then((r) => r.text()).catch(() => '');
+  engineText.then((src) => Promise.all(faces.map((f) => document.fonts.load(f, sample + src).catch(() => {}))))
+    .finally(() => { app.refreshText(); dirty = true; });
+  if (document.fonts) document.fonts.addEventListener('loadingdone', () => { app.refreshText(); dirty = true; });
+  const start = Number(location.hash.replace('#t', '')) || 0;
+  if (start) jump(start);
+  requestAnimationFrame(frame);
+})();
+</script>
