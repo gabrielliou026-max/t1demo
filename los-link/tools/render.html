@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../build/fonts/fonts.css">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+</head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script src="../web/data.js"></script>
+<script src="../web/vendor/three.min.js"></script>
+<script src="../web/engine.js"></script>
+<script>
+(async () => {
+  const D = window.CASCCS_DATA;
+  const all = JSON.stringify(D) + '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz視距無線電鏈路頻率與通聯可達率';
+  const faces = ["400 20px 'Noto Sans TC'", "500 20px 'Noto Sans TC'", "700 20px 'Noto Sans TC'", "900 20px 'Noto Sans TC'",
+                 "400 20px 'JetBrains Mono'", "700 20px 'JetBrains Mono'", "500 20px 'Oxanium'", "700 20px 'Oxanium'"];
+  // also make sure every string drawn by the engine source is covered
+  const src = window.EXTRA_TEXT || '';  // engine source, injected by the node driver so its labels' glyphs load
+  await Promise.all(faces.map((f) => document.fonts.load(f, all + src)));
+  await document.fonts.ready;
+  const app = CASCCS.create(document.getElementById('c'), D);
+  window.renderAt = (t, mode) => app.render(t, { subs: mode || 'both' });
+  window.frameJPEG = (t, q) => { app.render(t, { subs: 'both' }); return document.getElementById('c').toDataURL('image/jpeg', q || 0.93); };
+  window.timeline = D.timeline;
+  window.ready = true;
+})();
+</script>
+</body></html>
