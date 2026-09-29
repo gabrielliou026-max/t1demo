@@ -58,8 +58,8 @@ window.CASCCS_DATA = {
  ],
  "timeline": {
   "fps": 30,
-  "duration": 434.33,
-  "narrated": false,
+  "duration": 458.22,
+  "narrated": true,
   "chapters": [
    {
     "id": "intro",
@@ -67,79 +67,79 @@ window.CASCCS_DATA = {
     "en": "Why Frequency Matters",
     "start": 0.0,
     "lead": 4.5,
-    "end": 34.78
+    "end": 37.37
    },
    {
     "id": "fspl",
     "zh": "自由空間路徑損耗",
     "en": "Free-Space Path Loss",
-    "start": 34.78,
+    "start": 37.37,
     "lead": 1.5,
-    "end": 87.0
+    "end": 95.62
    },
    {
     "id": "aperture",
     "zh": "頻率項從哪裡來",
     "en": "Where the Frequency Term Comes From",
-    "start": 87.0,
+    "start": 95.62,
     "lead": 1.5,
-    "end": 120.18
+    "end": 128.35
    },
    {
     "id": "fresnel",
     "zh": "菲涅爾區淨空",
     "en": "Fresnel Zone Clearance",
-    "start": 120.18,
+    "start": 128.35,
     "lead": 1.5,
-    "end": 173.37
+    "end": 183.59
    },
    {
     "id": "quick",
     "zh": "中點速判與餘裕反推",
     "en": "Midpoint Check & Margin",
-    "start": 173.37,
+    "start": 183.59,
     "lead": 1.5,
-    "end": 235.14
+    "end": 247.19
    },
    {
     "id": "multipath",
     "zh": "多路徑衰落",
     "en": "Multipath Fading",
-    "start": 235.14,
+    "start": 247.19,
     "lead": 1.5,
-    "end": 287.67
+    "end": 302.77
    },
    {
     "id": "foliage",
     "zh": "植被與天氣",
     "en": "Foliage & Weather",
-    "start": 287.67,
+    "start": 302.77,
     "lead": 1.5,
-    "end": 317.37
+    "end": 334.62
    },
    {
     "id": "urban",
     "zh": "城市：非視距與屋頂鏈路",
     "en": "Urban: NLOS vs. Rooftop Links",
-    "start": 317.37,
+    "start": 334.62,
     "lead": 1.5,
-    "end": 362.0
+    "end": 382.09
    },
    {
     "id": "terrain",
     "zh": "地形情境",
     "en": "Terrain Scenarios",
-    "start": 362.0,
+    "start": 382.09,
     "lead": 1.5,
-    "end": 403.66
+    "end": 426.22
    },
    {
     "id": "summary",
     "zh": "總結",
     "en": "Wrap-up",
-    "start": 403.66,
+    "start": 426.22,
     "lead": 1.5,
-    "end": 434.33
+    "end": 458.22
    }
   ],
   "sentences": [
@@ -148,7 +148,7 @@ window.CASCCS_DATA = {
     "c": 0,
     "k": 0,
     "start": 4.5,
-    "end": 10.4,
+    "end": 10.3,
     "zh": "同樣的電台、同樣的功率，換一個頻段，通聯結果可能完全不同。",
     "en": "Same radio, same power — switch bands, and the link can behave completely differently."
    },
@@ -156,8 +156,8 @@ window.CASCCS_DATA = {
     "n": 1,
     "c": 0,
     "k": 1,
-    "start": 10.76,
-    "end": 19.84,
+    "start": 10.66,
+    "end": 21.72,
     "zh": "這支影片比較兩個頻段：低頻段 1350 到 2690 MHz，高頻段 4400 到 5900 MHz。",
     "en": "We compare two bands: the low band, 1350 to 2690 MHz, and the high band, 4400 to 5900 MHz."
    },
@@ -165,8 +165,8 @@ window.CASCCS_DATA = {
     "n": 2,
     "c": 0,
     "k": 2,
-    "start": 20.2,
-    "end": 27.93,
+    "start": 22.08,
+    "end": 30.0,
     "zh": "我們從四個物理面向來看：距離損耗、菲涅爾區淨空、多路徑反射，以及植被與天氣。",
     "en": "We look at four physical factors: distance loss, Fresnel zone clearance, multipath reflections, and foliage and weather."
    },
@@ -174,8 +174,8 @@ window.CASCCS_DATA = {
     "n": 3,
     "c": 0,
     "k": 3,
-    "start": 28.29,
-    "end": 33.98,
+    "start": 30.36,
+    "end": 36.57,
     "zh": "最後，再把這些原理套進城市、森林、水面和山區等實際情境。",
     "en": "Then we apply them to real terrain: cities, forests, water and mountains."
    },
@@ -183,8 +183,8 @@ window.CASCCS_DATA = {
     "n": 4,
     "c": 1,
     "k": 0,
-    "start": 36.28,
-    "end": 41.7,
+    "start": 38.87,
+    "end": 45.4,
     "zh": "視距鏈路最基本的衰減，叫做自由空間路徑損耗，簡稱 FSPL。",
     "en": "The most basic loss on a line-of-sight link is free-space path loss, or FSPL."
    },
@@ -192,8 +192,8 @@ window.CASCCS_DATA = {
     "n": 5,
     "c": 1,
     "k": 1,
-    "start": 42.06,
-    "end": 50.0,
+    "start": 45.76,
+    "end": 54.8,
     "zh": "公式是：32.4，加上 20 log 頻率 MHz，再加上 20 log 距離公里。",
     "en": "FSPL in dB is 32.4, plus 20 log of the frequency in MHz, plus 20 log of the distance in km."
    },
@@ -201,8 +201,8 @@ window.CASCCS_DATA = {
     "n": 6,
     "c": 1,
     "k": 2,
-    "start": 50.36,
-    "end": 56.8,
+    "start": 55.16,
+    "end": 62.52,
     "zh": "記住兩個口訣：距離加倍，損耗多 6 dB；頻率加倍，損耗同樣多 6 dB。",
     "en": "Two rules of thumb: double the distance, add 6 dB; double the frequency, add another 6 dB."
    },
@@ -210,8 +210,8 @@ window.CASCCS_DATA = {
     "n": 7,
     "c": 1,
     "k": 3,
-    "start": 57.16,
-    "end": 67.08,
+    "start": 62.88,
+    "end": 73.97,
     "zh": "以 20 公里為例，1350 MHz 損耗約 121 dB，5900 MHz 約 134 dB，差了將近 13 dB。",
     "en": "At 20 km, the loss is about 121 dB at 1350 MHz and about 134 dB at 5900 MHz — nearly 13 dB apart."
    },
@@ -219,8 +219,8 @@ window.CASCCS_DATA = {
     "n": 8,
     "c": 1,
     "k": 4,
-    "start": 67.44,
-    "end": 79.04,
+    "start": 74.33,
+    "end": 87.65,
     "zh": "用 0.3 瓦、也就是 24.8 dBm 發射，兩端都是 0 dBi 天線，20 公里外，低頻約收到負 96 dBm，高頻只剩負 109 dBm。",
     "en": "Transmitting 0.3 W, or 24.8 dBm, with 0 dBi antennas, at 20 km you receive about −96 dBm on the low band but only −109 dBm on the high band."
    },
@@ -228,8 +228,8 @@ window.CASCCS_DATA = {
     "n": 9,
     "c": 1,
     "k": 5,
-    "start": 79.4,
-    "end": 86.2,
+    "start": 88.01,
+    "end": 94.82,
     "zh": "這些是套公式的示範數字，實際還要看天線增益、饋線損耗和接收靈敏度。",
     "en": "These are illustrative numbers; real links also depend on antenna gain, feeder loss and receiver sensitivity."
    },
@@ -237,8 +237,8 @@ window.CASCCS_DATA = {
     "n": 10,
     "c": 2,
     "k": 0,
-    "start": 88.5,
-    "end": 94.46,
+    "start": 97.12,
+    "end": 103.05,
     "zh": "不過要澄清一個常見誤解：電波在空間中擴散，本身跟頻率無關。",
     "en": "But let's clear up a common misconception: the way energy spreads through space doesn't depend on frequency."
    },
@@ -246,8 +246,8 @@ window.CASCCS_DATA = {
     "n": 11,
     "c": 2,
     "k": 1,
-    "start": 94.82,
-    "end": 99.79,
+    "start": 103.41,
+    "end": 108.2,
     "zh": "公式裡會出現頻率，是因為它假設兩端都用等向天線。",
     "en": "The frequency term appears because the formula assumes isotropic antennas at both ends."
    },
@@ -255,8 +255,8 @@ window.CASCCS_DATA = {
     "n": 12,
     "c": 2,
     "k": 2,
-    "start": 100.15,
-    "end": 106.74,
+    "start": 108.56,
+    "end": 115.4,
     "zh": "等向天線的有效孔徑跟波長平方成正比，頻率越高，能接住的能量越少。",
     "en": "An isotropic antenna's effective aperture scales with wavelength squared, so the higher the frequency, the less energy it catches."
    },
@@ -264,8 +264,8 @@ window.CASCCS_DATA = {
     "n": 13,
     "c": 2,
     "k": 3,
-    "start": 107.1,
-    "end": 112.22,
+    "start": 115.76,
+    "end": 120.65,
     "zh": "反過來說，同樣大小的天線，在高頻反而有更高的增益。",
     "en": "Flip it around: an antenna of the same physical size has more gain at a higher frequency."
    },
@@ -273,8 +273,8 @@ window.CASCCS_DATA = {
     "n": 14,
     "c": 2,
     "k": 4,
-    "start": 112.58,
-    "end": 119.38,
+    "start": 121.01,
+    "end": 127.55,
     "zh": "所以用高增益天線補償後，高頻的實際鏈路餘裕差距，會比公式看起來小。",
     "en": "So with high-gain antennas, the real link-margin gap for the high band is smaller than the formula suggests."
    },
@@ -282,8 +282,8 @@ window.CASCCS_DATA = {
     "n": 15,
     "c": 3,
     "k": 0,
-    "start": 121.68,
-    "end": 124.97,
+    "start": 129.85,
+    "end": 132.77,
     "zh": "看得到對方，不代表鏈路就一定好。",
     "en": "Seeing the far end doesn't guarantee a good link."
    },
@@ -291,8 +291,8 @@ window.CASCCS_DATA = {
     "n": 16,
     "c": 3,
     "k": 1,
-    "start": 125.33,
-    "end": 130.51,
+    "start": 133.13,
+    "end": 138.12,
     "zh": "電波會在直線路徑周圍，形成一個橄欖球形的菲涅爾區。",
     "en": "Radio energy travels through a football-shaped Fresnel zone around the straight path."
    },
@@ -300,8 +300,8 @@ window.CASCCS_DATA = {
     "n": 17,
     "c": 3,
     "k": 2,
-    "start": 130.87,
-    "end": 136.2,
+    "start": 138.48,
+    "end": 144.1,
     "zh": "地形、樹木或建物一旦侵入這個區域，就會產生繞射損耗。",
     "en": "When terrain, trees or buildings intrude into it, you get diffraction loss."
    },
@@ -309,8 +309,8 @@ window.CASCCS_DATA = {
     "n": 18,
     "c": 3,
     "k": 3,
-    "start": 136.56,
-    "end": 144.38,
+    "start": 144.46,
+    "end": 153.24,
     "zh": "第一菲涅爾區半徑，等於 17.3 乘上根號，d1 乘 d2，除以頻率 GHz 乘總距離。",
     "en": "The first Fresnel radius is 17.3 times the square root of d1 times d2, over the frequency in GHz times the total distance."
    },
@@ -318,8 +318,8 @@ window.CASCCS_DATA = {
     "n": 19,
     "c": 3,
     "k": 4,
-    "start": 144.74,
-    "end": 153.4,
+    "start": 153.6,
+    "end": 163.07,
     "zh": "在 20 公里鏈路的正中央，1350 MHz 半徑約 33 公尺，5900 MHz 只有約 16 公尺。",
     "en": "At the midpoint of a 20 km link, the radius is about 33 m at 1350 MHz, but only about 16 m at 5900 MHz."
    },
@@ -327,8 +327,8 @@ window.CASCCS_DATA = {
     "n": 20,
     "c": 3,
     "k": 5,
-    "start": 153.76,
-    "end": 160.05,
+    "start": 163.43,
+    "end": 169.87,
     "zh": "ITU-R P.530 建議，路徑至少要淨空第一菲涅爾區的 60%。",
     "en": "ITU-R P.530 recommends clearing at least 60% of the first Fresnel zone."
    },
@@ -336,8 +336,8 @@ window.CASCCS_DATA = {
     "n": 21,
     "c": 3,
     "k": 6,
-    "start": 160.41,
-    "end": 166.37,
+    "start": 170.23,
+    "end": 176.47,
     "zh": "換算下來，中點淨空低頻段要約 20 公尺，高頻段約 9.6 公尺。",
     "en": "That's about 20 m of midpoint clearance for the low band, and about 9.6 m for the high band."
    },
@@ -345,8 +345,8 @@ window.CASCCS_DATA = {
     "n": 22,
     "c": 3,
     "k": 7,
-    "start": 166.73,
-    "end": 172.57,
+    "start": 176.83,
+    "end": 182.79,
     "zh": "如果障礙物剛好貼著視線，視形狀而定，損耗可能高達 15 dB。",
     "en": "If an obstacle just grazes the line of sight, the loss can reach 15 dB, depending on its shape."
    },
@@ -354,8 +354,8 @@ window.CASCCS_DATA = {
     "n": 23,
     "c": 4,
     "k": 0,
-    "start": 174.87,
-    "end": 180.83,
+    "start": 185.09,
+    "end": 190.99,
     "zh": "實務上有個更快的判斷法：只看路徑正中央，這個最嚴苛的位置。",
     "en": "In practice there's a quicker check: look only at the midpoint, the tightest spot on the path."
    },
@@ -363,8 +363,8 @@ window.CASCCS_DATA = {
     "n": 24,
     "c": 4,
     "k": 1,
-    "start": 181.19,
-    "end": 189.25,
+    "start": 191.35,
+    "end": 200.62,
     "zh": "中點的 0.6 F1 淨空，約等於 5.2 乘上根號，距離公里除以頻率 GHz，單位是公尺。",
     "en": "The midpoint 0.6 F1 clearance is about 5.2 times the square root of distance in km over frequency in GHz, in meters."
    },
@@ -372,8 +372,8 @@ window.CASCCS_DATA = {
     "n": 25,
     "c": 4,
     "k": 2,
-    "start": 189.61,
-    "end": 198.75,
+    "start": 200.98,
+    "end": 210.58,
     "zh": "以 4700 MHz 為例：1.2 公里只要 2.6 公尺，10 公里要 7.6 公尺，30 公里要 13.1 公尺。",
     "en": "At 4700 MHz: 2.6 m for 1.2 km, 7.6 m for 10 km, and 13.1 m for 30 km."
    },
@@ -381,8 +381,8 @@ window.CASCCS_DATA = {
     "n": 26,
     "c": 4,
     "k": 3,
-    "start": 199.11,
-    "end": 204.29,
+    "start": 210.94,
+    "end": 216.05,
     "zh": "路徑中點附近的建物或樹木低於這個高度，就不必擔心。",
     "en": "If buildings or trees near the midpoint stay below that height, you're fine."
    },
@@ -390,8 +390,8 @@ window.CASCCS_DATA = {
     "n": 27,
     "c": 4,
     "k": 4,
-    "start": 204.65,
-    "end": 210.43,
+    "start": 216.41,
+    "end": 221.88,
     "zh": "但 0.6 F1 是零損耗的保守門檻，還可以用鏈路餘裕反推。",
     "en": "But 0.6 F1 is a conservative, zero-loss threshold — you can also work backward from the link margin."
    },
@@ -399,8 +399,8 @@ window.CASCCS_DATA = {
     "n": 28,
     "c": 4,
     "k": 5,
-    "start": 210.79,
-    "end": 219.42,
+    "start": 222.24,
+    "end": 231.33,
     "zh": "一條 1.2 公里、4700 MHz、餘裕 69 dB 的鏈路，障礙物剛好貼齊視線，只損失約 6 dB。",
     "en": "On a 1.2 km, 4700 MHz link with 69 dB of margin, an obstacle touching the line of sight costs only about 6 dB."
    },
@@ -408,8 +408,8 @@ window.CASCCS_DATA = {
     "n": 29,
     "c": 4,
     "k": 6,
-    "start": 219.78,
-    "end": 226.34,
+    "start": 231.69,
+    "end": 238.45,
     "zh": "就算障礙物突出視線 12 公尺，也只吃掉約 25 dB，還剩 44 dB。",
     "en": "Even 12 m above the line, it eats only about 25 dB, leaving 44 dB."
    },
@@ -417,8 +417,8 @@ window.CASCCS_DATA = {
     "n": 30,
     "c": 4,
     "k": 7,
-    "start": 226.7,
-    "end": 234.34,
+    "start": 238.81,
+    "end": 246.39,
     "zh": "不過地形資料多半抓不到建物和樹，最可靠的還是現地會勘，親眼確認看得到對方。",
     "en": "But terrain data usually misses buildings and trees — a site survey, confirming you can see the far end, is still the most reliable check."
    },
@@ -426,8 +426,8 @@ window.CASCCS_DATA = {
     "n": 31,
     "c": 5,
     "k": 0,
-    "start": 236.64,
-    "end": 242.39,
+    "start": 248.69,
+    "end": 254.58,
     "zh": "除了直射波，訊號也會經由地面或水面反射，走另一條路抵達。",
     "en": "Besides the direct wave, the signal also bounces off the ground or water and arrives by another path."
    },
@@ -435,8 +435,8 @@ window.CASCCS_DATA = {
     "n": 32,
     "c": 5,
     "k": 1,
-    "start": 242.75,
-    "end": 248.5,
+    "start": 254.94,
+    "end": 261.05,
     "zh": "兩條路徑長度不同，到達時相位也不同，就會互相疊加或抵消。",
     "en": "The two paths differ in length, so they arrive with different phases and add up or cancel out."
    },
@@ -444,8 +444,8 @@ window.CASCCS_DATA = {
     "n": 33,
     "c": 5,
     "k": 2,
-    "start": 248.86,
-    "end": 253.14,
+    "start": 261.41,
+    "end": 265.82,
     "zh": "路徑差約等於 2 乘 h1 乘 h2，除以距離。",
     "en": "The path difference is roughly 2 times h1 times h2, divided by the distance."
    },
@@ -453,8 +453,8 @@ window.CASCCS_DATA = {
     "n": 34,
     "c": 5,
     "k": 3,
-    "start": 253.5,
-    "end": 258.83,
+    "start": 266.18,
+    "end": 272.08,
     "zh": "兩端天線都是 10 公尺高、相距 10 公里，路徑差只有 2 公分。",
     "en": "With both antennas 10 m high and 10 km apart, the difference is only 2 cm."
    },
@@ -462,8 +462,8 @@ window.CASCCS_DATA = {
     "n": 35,
     "c": 5,
     "k": 4,
-    "start": 259.19,
-    "end": 267.85,
+    "start": 272.44,
+    "end": 281.89,
     "zh": "可是這 2 公分，在 1350 MHz 只佔波長的 9%，在 5900 MHz 卻佔了 39%。",
     "en": "Yet those 2 cm are 9% of a wavelength at 1350 MHz, but 39% at 5900 MHz."
    },
@@ -471,8 +471,8 @@ window.CASCCS_DATA = {
     "n": 36,
     "c": 5,
     "k": 5,
-    "start": 268.21,
-    "end": 274.59,
+    "start": 282.25,
+    "end": 289.01,
     "zh": "另外，低仰角的地面或水面反射，本身還會讓相位翻轉約 180 度。",
     "en": "On top of that, a low-angle reflection off ground or water flips the phase by about 180 degrees."
    },
@@ -480,8 +480,8 @@ window.CASCCS_DATA = {
     "n": 37,
     "c": 5,
     "k": 6,
-    "start": 274.95,
-    "end": 281.18,
+    "start": 289.37,
+    "end": 295.8,
     "zh": "所以高頻對天線高度和地形的小變化更敏感，更容易掉進深度衰落。",
     "en": "So the high band is more sensitive to small changes in antenna height and terrain, and falls into deep fades more easily."
    },
@@ -489,8 +489,8 @@ window.CASCCS_DATA = {
     "n": 38,
     "c": 5,
     "k": 7,
-    "start": 281.54,
-    "end": 286.87,
+    "start": 296.16,
+    "end": 301.97,
     "zh": "對策是：把天線架高，並避開貼近水面或平坦地面的路徑。",
     "en": "The remedy: mount antennas higher, and avoid paths that skim water or flat ground."
    },
@@ -498,8 +498,8 @@ window.CASCCS_DATA = {
     "n": 39,
     "c": 6,
     "k": 0,
-    "start": 289.17,
-    "end": 293.78,
+    "start": 304.27,
+    "end": 309.04,
     "zh": "低頻電波比較容易繞過或穿過樹葉這類小障礙物。",
     "en": "Lower frequencies bend around and pass through small obstacles like foliage more easily."
    },
@@ -507,8 +507,8 @@ window.CASCCS_DATA = {
     "n": 40,
     "c": 6,
     "k": 1,
-    "start": 294.14,
-    "end": 299.89,
+    "start": 309.4,
+    "end": 315.45,
     "zh": "高頻段在視距內幾乎像光一樣傳播，一被遮住，損耗就很明顯。",
     "en": "The high band travels almost like light — once it's blocked, the loss is significant."
    },
@@ -516,8 +516,8 @@ window.CASCCS_DATA = {
     "n": 41,
     "c": 6,
     "k": 2,
-    "start": 300.25,
-    "end": 306.18,
+    "start": 315.81,
+    "end": 322.73,
     "zh": "那下雨呢？在 6 GHz 以下，雨衰通常不顯著，要到 10 GHz 以上才明顯。",
     "en": "What about rain? Below 6 GHz, rain fade is usually minor; it becomes significant above 10 GHz."
    },
@@ -525,8 +525,8 @@ window.CASCCS_DATA = {
     "n": 42,
     "c": 6,
     "k": 3,
-    "start": 306.54,
-    "end": 310.25,
+    "start": 323.09,
+    "end": 327.05,
     "zh": "濕氣和霧，對頻段上緣可能有些微影響。",
     "en": "Humidity and fog may have a slight effect near the top of the band."
    },
@@ -534,8 +534,8 @@ window.CASCCS_DATA = {
     "n": 43,
     "c": 6,
     "k": 4,
-    "start": 310.61,
-    "end": 316.57,
+    "start": 327.41,
+    "end": 333.82,
     "zh": "另外，視距路徑的損耗指數約為 2，非視距環境可能升到 4 到 5。",
     "en": "Also, the path-loss exponent is about 2 with line of sight, but can rise to 4 or 5 without it."
    },
@@ -543,8 +543,8 @@ window.CASCCS_DATA = {
     "n": 44,
     "c": 7,
     "k": 0,
-    "start": 318.87,
-    "end": 327.02,
+    "start": 336.12,
+    "end": 344.86,
     "zh": "在城市裡，訊號常要繞過轉角、穿過牆面；在這種真正的非視距環境，低頻段比較吃得開。",
     "en": "In a city, signals must bend around corners and through walls; in true non-line-of-sight conditions, the low band holds up better."
    },
@@ -552,8 +552,8 @@ window.CASCCS_DATA = {
     "n": 45,
     "c": 7,
     "k": 1,
-    "start": 327.38,
-    "end": 334.12,
+    "start": 345.22,
+    "end": 352.15,
     "zh": "但屋頂對屋頂、彼此看得到，只是周圍高樓很接近視線時，結果可能相反。",
     "en": "But rooftop to rooftop — with a clear view, but buildings close to the line — the result can flip."
    },
@@ -561,8 +561,8 @@ window.CASCCS_DATA = {
     "n": 46,
     "c": 7,
     "k": 2,
-    "start": 334.48,
-    "end": 342.57,
+    "start": 352.51,
+    "end": 361.21,
     "zh": "同一條 20 公里鏈路，障礙物在視線下方 15 公尺時，低頻損失約 1 dB，高頻幾乎沒有。",
     "en": "On the same 20 km link, with an obstacle 15 m below the line, the low band loses about 1 dB; the high band almost nothing."
    },
@@ -570,8 +570,8 @@ window.CASCCS_DATA = {
     "n": 47,
     "c": 7,
     "k": 3,
-    "start": 342.93,
-    "end": 349.43,
+    "start": 361.57,
+    "end": 368.86,
     "zh": "在視線下方 5 公尺，低頻 4.2 dB，高頻 2.4 dB，還是高頻佔優勢。",
     "en": "At 5 m below, it's 4.2 dB versus 2.4 dB — the high band still wins."
    },
@@ -579,8 +579,8 @@ window.CASCCS_DATA = {
     "n": 48,
     "c": 7,
     "k": 4,
-    "start": 349.79,
-    "end": 356.92,
+    "start": 369.22,
+    "end": 377.05,
     "zh": "可是一旦突出視線 5 公尺，低頻 7.9 dB，高頻 9.8 dB，低頻反而比較好。",
     "en": "But once it pokes 5 m above the line, it's 7.9 versus 9.8 dB — now the low band is better."
    },
@@ -588,8 +588,8 @@ window.CASCCS_DATA = {
     "n": 49,
     "c": 7,
     "k": 5,
-    "start": 357.28,
-    "end": 361.2,
+    "start": 377.41,
+    "end": 381.29,
     "zh": "交叉點，就在障礙物剛好碰到視線的位置。",
     "en": "The crossover sits right where the obstacle touches the line of sight."
    },
@@ -597,8 +597,8 @@ window.CASCCS_DATA = {
     "n": 50,
     "c": 8,
     "k": 0,
-    "start": 363.5,
-    "end": 369.55,
+    "start": 383.59,
+    "end": 390.0,
     "zh": "開闊平地、長距離：路徑損耗是主角，低頻段餘裕較大，打得較遠。",
     "en": "Open, flat, long range: path loss dominates, and the low band has more margin and reach."
    },
@@ -606,8 +606,8 @@ window.CASCCS_DATA = {
     "n": 51,
     "c": 8,
     "k": 1,
-    "start": 369.91,
-    "end": 374.67,
+    "start": 390.36,
+    "end": 395.41,
     "zh": "森林或植被密集：低頻段的繞射和穿透能力比較好。",
     "en": "Dense forest or vegetation: the low band diffracts and penetrates better."
    },
@@ -615,8 +615,8 @@ window.CASCCS_DATA = {
     "n": 52,
     "c": 8,
     "k": 2,
-    "start": 375.03,
-    "end": 381.92,
+    "start": 395.77,
+    "end": 403.45,
     "zh": "水面與沿岸：反射強，多路徑衰落隨頻率升高，優先用低頻，並把天線架高。",
     "en": "Over water and along the coast: strong reflections and fading that grows with frequency — prefer the low band and mount antennas high."
    },
@@ -624,8 +624,8 @@ window.CASCCS_DATA = {
     "n": 53,
     "c": 8,
     "k": 3,
-    "start": 382.28,
-    "end": 390.07,
+    "start": 403.81,
+    "end": 411.99,
     "zh": "山區地形夾縫：高頻段菲涅爾區較窄，搭配高增益指向天線，反而容易找到淨空路徑。",
     "en": "Mountain gaps: the high band's thinner Fresnel zone, with a high-gain directional antenna, can actually find a clear path."
    },
@@ -633,8 +633,8 @@ window.CASCCS_DATA = {
     "n": 54,
     "c": 8,
     "k": 4,
-    "start": 390.43,
-    "end": 394.77,
+    "start": 412.35,
+    "end": 416.9,
     "zh": "不過高增益天線波束窄，對準精度要求也更高。",
     "en": "But a high-gain antenna has a narrow beam, so it demands more precise alignment."
    },
@@ -642,8 +642,8 @@ window.CASCCS_DATA = {
     "n": 55,
     "c": 8,
     "k": 5,
-    "start": 395.13,
-    "end": 402.86,
+    "start": 417.26,
+    "end": 425.42,
     "zh": "快速架設、對準條件不確定時：低頻段波束寬、對準容錯高，但需要的淨空高度較大。",
     "en": "Rapid setup with uncertain alignment: the low band's wide beam is forgiving, though it needs more clearance height."
    },
@@ -651,8 +651,8 @@ window.CASCCS_DATA = {
     "n": 56,
     "c": 9,
     "k": 0,
-    "start": 405.16,
-    "end": 410.79,
+    "start": 427.72,
+    "end": 433.61,
     "zh": "整理一下：大多數情境，低頻段損耗低、繞射好，也比較寬容。",
     "en": "To sum up: in most situations the low band has lower loss, better diffraction, and more tolerance."
    },
@@ -660,8 +660,8 @@ window.CASCCS_DATA = {
     "n": 57,
     "c": 9,
     "k": 1,
-    "start": 411.15,
-    "end": 417.05,
+    "start": 433.97,
+    "end": 440.15,
     "zh": "高頻段則在邊緣淨空、山區夾縫，或需要窄波束時，有機會勝出。",
     "en": "The high band can win with marginal clearance, in mountain gaps, or when you need a narrow beam."
    },
@@ -669,8 +669,8 @@ window.CASCCS_DATA = {
     "n": 58,
     "c": 9,
     "k": 2,
-    "start": 417.41,
-    "end": 425.2,
+    "start": 440.51,
+    "end": 448.47,
     "zh": "這些是物理原理層級的通則，實際選頻還要考慮頻譜派配、干擾、傳輸量和裝備規格。",
     "en": "These are physics-level rules of thumb; real band choices also weigh spectrum assignment, interference, throughput and equipment specs."
    },
@@ -678,8 +678,8 @@ window.CASCCS_DATA = {
     "n": 59,
     "c": 9,
     "k": 3,
-    "start": 425.56,
-    "end": 429.63,
+    "start": 448.83,
+    "end": 453.42,
     "zh": "最後，用鏈路預算工具算過，再到現地確認。",
     "en": "Finally, run the numbers in a link-budget tool, and confirm on site."
    },
@@ -687,8 +687,8 @@ window.CASCCS_DATA = {
     "n": 60,
     "c": 9,
     "k": 4,
-    "start": 429.99,
-    "end": 431.03,
+    "start": 453.78,
+    "end": 454.92,
     "zh": "謝謝收看！",
     "en": "Thanks for watching!"
    }
