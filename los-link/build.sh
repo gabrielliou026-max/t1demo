@@ -13,3 +13,4 @@ python3 tools/audio.py
 node tools/shots.mjs && python3 tools/sheets.py
 node tools/render.mjs 4
 python3 tools/export_script.py
+python3 tools/export_srt.py
