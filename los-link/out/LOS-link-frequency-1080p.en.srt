@@ -1,0 +1,243 @@
+1
+00:00:04,380 --> 00:00:10,640
+Same radio, same power — switch bands, and the link can behave completely differently.
+
+2
+00:00:10,640 --> 00:00:21,330
+We compare two bands: the low band, 1350 to 2690 MHz, and the high band, 4400 to 5900 MHz.
+
+3
+00:00:21,330 --> 00:00:30,910
+We look at four physical factors: distance loss, Fresnel zone clearance, multipath reflections, and foliage and weather.
+
+4
+00:00:30,910 --> 00:00:37,830
+Then we apply them to real terrain: cities, forests, water and mountains.
+
+5
+00:00:39,460 --> 00:00:46,890
+The most basic loss on a line-of-sight link is free-space path loss, or FSPL.
+
+6
+00:00:46,890 --> 00:00:56,540
+FSPL in dB is 32.4, plus 20 log of the frequency in MHz, plus 20 log of the distance in km.
+
+7
+00:00:56,540 --> 00:01:05,030
+Two rules of thumb: double the distance, add 6 dB; double the frequency, add another 6 dB.
+
+8
+00:01:05,030 --> 00:01:17,040
+At 20 km, the loss is about 121 dB at 1350 MHz and about 134 dB at 5900 MHz — nearly 13 dB apart.
+
+9
+00:01:17,040 --> 00:01:31,000
+Transmitting 0.3 W, or 24.8 dBm, with 0 dBi antennas, at 20 km you receive about −96 dBm on the low band but only −109 dBm on the high band.
+
+10
+00:01:31,000 --> 00:01:38,680
+These are illustrative numbers; real links also depend on antenna gain, feeder loss and receiver sensitivity.
+
+11
+00:01:40,310 --> 00:01:47,140
+But let's clear up a common misconception: the way energy spreads through space doesn't depend on frequency.
+
+12
+00:01:47,140 --> 00:01:52,670
+The frequency term appears because the formula assumes isotropic antennas at both ends.
+
+13
+00:01:52,670 --> 00:02:00,460
+An isotropic antenna's effective aperture scales with wavelength squared, so the higher the frequency, the less energy it catches.
+
+14
+00:02:00,460 --> 00:02:06,270
+Flip it around: an antenna of the same physical size has more gain at a higher frequency.
+
+15
+00:02:06,270 --> 00:02:13,790
+So with high-gain antennas, the real link-margin gap for the high band is smaller than the formula suggests.
+
+16
+00:02:15,420 --> 00:02:18,670
+Seeing the far end doesn't guarantee a good link.
+
+17
+00:02:18,670 --> 00:02:24,370
+Radio energy travels through a football-shaped Fresnel zone around the straight path.
+
+18
+00:02:24,370 --> 00:02:30,860
+When terrain, trees or buildings intrude into it, you get diffraction loss.
+
+19
+00:02:30,860 --> 00:02:41,030
+The first Fresnel radius is 17.3 times the square root of d1 times d2, over the frequency in GHz times the total distance.
+
+20
+00:02:41,030 --> 00:02:51,240
+At the midpoint of a 20 km link, the radius is about 33 m at 1350 MHz, but only about 16 m at 5900 MHz.
+
+21
+00:02:51,240 --> 00:02:58,890
+ITU-R P.530 recommends clearing at least 60% of the first Fresnel zone.
+
+22
+00:02:58,890 --> 00:03:06,040
+That's about 20 m of midpoint clearance for the low band, and about 9.6 m for the high band.
+
+23
+00:03:06,040 --> 00:03:13,160
+If an obstacle just grazes the line of sight, the loss can reach 15 dB, depending on its shape.
+
+24
+00:03:14,790 --> 00:03:21,290
+In practice there's a quicker check: look only at the midpoint, the tightest spot on the path.
+
+25
+00:03:21,290 --> 00:03:30,670
+The midpoint 0.6 F1 clearance is about 5.2 times the square root of distance in km over frequency in GHz, in meters.
+
+26
+00:03:30,670 --> 00:03:40,790
+At 4700 MHz: 2.6 m for 1.2 km, 7.6 m for 10 km, and 13.1 m for 30 km.
+
+27
+00:03:40,790 --> 00:03:45,880
+If buildings or trees near the midpoint stay below that height, you're fine.
+
+28
+00:03:45,880 --> 00:03:52,090
+But 0.6 F1 is a conservative, zero-loss threshold — you can also work backward from the link margin.
+
+29
+00:03:52,090 --> 00:04:01,930
+On a 1.2 km, 4700 MHz link with 69 dB of margin, an obstacle touching the line of sight costs only about 6 dB.
+
+30
+00:04:01,930 --> 00:04:08,960
+Even 12 m above the line, it eats only about 25 dB, leaving 44 dB.
+
+31
+00:04:08,960 --> 00:04:17,550
+But terrain data usually misses buildings and trees — a site survey, confirming you can see the far end, is still the most reliable check.
+
+32
+00:04:19,180 --> 00:04:25,760
+Besides the direct wave, the signal also bounces off the ground or water and arrives by another path.
+
+33
+00:04:25,760 --> 00:04:32,300
+The two paths differ in length, so they arrive with different phases and add up or cancel out.
+
+34
+00:04:32,300 --> 00:04:37,460
+The path difference is roughly 2 times h1 times h2, divided by the distance.
+
+35
+00:04:37,460 --> 00:04:43,730
+With both antennas 10 m high and 10 km apart, the difference is only 2 cm.
+
+36
+00:04:43,730 --> 00:04:53,610
+Yet those 2 cm are 9% of a wavelength at 1350 MHz, but 39% at 5900 MHz.
+
+37
+00:04:53,610 --> 00:05:00,500
+On top of that, a low-angle reflection off ground or water flips the phase by about 180 degrees.
+
+38
+00:05:00,500 --> 00:05:07,480
+So the high band is more sensitive to small changes in antenna height and terrain, and falls into deep fades more easily.
+
+39
+00:05:07,480 --> 00:05:13,910
+The remedy: mount antennas higher, and avoid paths that skim water or flat ground.
+
+40
+00:05:15,540 --> 00:05:20,870
+Lower frequencies bend around and pass through small obstacles like foliage more easily.
+
+41
+00:05:20,870 --> 00:05:27,710
+The high band travels almost like light — once it's blocked, the loss is significant.
+
+42
+00:05:27,710 --> 00:05:36,200
+What about rain? Below 6 GHz, rain fade is usually minor; it becomes significant above 10 GHz.
+
+43
+00:05:36,200 --> 00:05:40,560
+Humidity and fog may have a slight effect near the top of the band.
+
+44
+00:05:40,560 --> 00:05:48,280
+Also, the path-loss exponent is about 2 with line of sight, but can rise to 4 or 5 without it.
+
+45
+00:05:49,910 --> 00:05:59,640
+In a city, signals must bend around corners and through walls; in true non-line-of-sight conditions, the low band holds up better.
+
+46
+00:05:59,640 --> 00:06:07,100
+But rooftop to rooftop — with a clear view, but buildings close to the line — the result can flip.
+
+47
+00:06:07,100 --> 00:06:16,930
+On the same 20 km link, with an obstacle 15 m below the line, the low band loses about 1 dB; the high band almost nothing.
+
+48
+00:06:16,930 --> 00:06:25,330
+At 5 m below, it's 4.2 dB versus 2.4 dB — the high band still wins.
+
+49
+00:06:25,330 --> 00:06:34,250
+But once it pokes 5 m above the line, it's 7.9 versus 9.8 dB — now the low band is better.
+
+50
+00:06:34,250 --> 00:06:38,900
+The crossover sits right where the obstacle touches the line of sight.
+
+51
+00:06:40,530 --> 00:06:47,740
+Open, flat, long range: path loss dominates, and the low band has more margin and reach.
+
+52
+00:06:47,740 --> 00:06:53,280
+Dense forest or vegetation: the low band diffracts and penetrates better.
+
+53
+00:06:53,280 --> 00:07:02,350
+Over water and along the coast: strong reflections and fading that grows with frequency — prefer the low band and mount antennas high.
+
+54
+00:07:02,350 --> 00:07:11,230
+Mountain gaps: the high band's thinner Fresnel zone, with a high-gain directional antenna, can actually find a clear path.
+
+55
+00:07:11,230 --> 00:07:16,560
+But a high-gain antenna has a narrow beam, so it demands more precise alignment.
+
+56
+00:07:16,560 --> 00:07:25,890
+Rapid setup with uncertain alignment: the low band's wide beam is forgiving, though it needs more clearance height.
+
+57
+00:07:27,520 --> 00:07:34,310
+To sum up: in most situations the low band has lower loss, better diffraction, and more tolerance.
+
+58
+00:07:34,310 --> 00:07:41,650
+The high band can win with marginal clearance, in mountain gaps, or when you need a narrow beam.
+
+59
+00:07:41,650 --> 00:07:51,190
+These are physics-level rules of thumb; real band choices also weigh spectrum assignment, interference, throughput and equipment specs.
+
+60
+00:07:51,190 --> 00:07:56,120
+Finally, run the numbers in a link-budget tool, and confirm on site.
+
+61
+00:07:56,120 --> 00:07:57,530
+Thanks for watching!
